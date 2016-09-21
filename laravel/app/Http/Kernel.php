@@ -38,6 +38,7 @@ class Kernel extends HttpKernel
         ],
         'Age' => [\testmiguel\Http\Middleware\AgeMiddleware::class],
         'AdminMiddleware' => [\testmiguel\Http\Middleware\AdminMiddleware::class],
+        'LoggedMiddleware' => [\testmiguel\Http\Middleware\LoggedMiddleware::class],
     ];
 
     /**

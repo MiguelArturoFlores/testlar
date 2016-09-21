@@ -13,19 +13,17 @@ class CreateUserTable extends Migration
      */
     public function up()
     {
-
-        if (!Schema::hasTable('storeuser')) {
             Schema::create('storeuser', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('name');
+                $table->string('lastname');
                 $table->string('email')->unique();
                 $table->string('password');
                 $table->string('address');
-                $table->string('default_role');
+                $table->integer('default_role')->default(0);
                 $table->rememberToken();
                 $table->timestamps();
             });
-        }
     }
 
     /**

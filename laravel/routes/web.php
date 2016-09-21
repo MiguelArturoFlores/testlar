@@ -40,6 +40,20 @@ Route::get('/Age',  [
 	] 
 );
 
+Route::get('/logout',function(){
+   return view('logout');
+})->middleware(LoggedMiddleware::class);
+
+Route::post('/logout',[
+	'middleware' => 'LoggedMiddleware',
+	'uses' => 'LoginController@logout']
+	);
+
+Route::get('/orders',[
+	'middleware' => 'LoggedMiddleware',
+	'uses' => 'OrderController@index']
+	);
+
 Route::get('/uploadProduct',[
 	'middleware' => 'AdminMiddleware',
 	'uses' => 'ProductController@index']

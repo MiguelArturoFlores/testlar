@@ -33,4 +33,11 @@ class User extends Authenticatable
      * @var string
      */
     protected $table = 'storeuser';
+
+
+    //RELATIONS
+    public function orders()
+    {
+        return $this->hasMany('testmiguel\Order');
+    }
 }
