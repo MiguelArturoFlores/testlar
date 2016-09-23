@@ -12,6 +12,6 @@ class Order extends Model
 
     // DEFINE RELATIONSHIPS --------------------------------------------------
     public function user() {
-        return $this->belongsTo('testmiguel\User');
+        return $this->belongsTo('testmiguel\User','user_id','id');
     }
 }

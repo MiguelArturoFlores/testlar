@@ -17,13 +17,14 @@ class OrderTableSeeder extends Seeder
         $order->delivery_type = 0;
         $order->payment_type = 0;
         $order->save();*/
-
-        DB::table('storeorder')->insert([
-            'state' => 0,
-            'user_id' => 3,
-            'delivery_type' => 0,
-            'payment_type' => 0,
-        ]);
+        for ($i = 1; $i <= 4; $i++) {
+          DB::table('storeorder')->insert([
+              'state' => 0,
+              'user_id' => 3,
+              'delivery_type' => 0,
+              'payment_type' => 0,
+          ]);
+        }
 
     }
 }

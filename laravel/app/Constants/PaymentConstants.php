@@ -1,0 +1,5 @@
+<?php
+
+define("PAYMENT_TYPE_CREDIT_CARD", 0);
+define("PAYMENT_TYPE_BANK_TRANSFER", 1);
+define("PAYMENT_TYPE_EFFECTY", 2);

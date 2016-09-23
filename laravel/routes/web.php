@@ -36,8 +36,8 @@ Route::get('/db/testinsert','UserRegisterController@insertTest');
 
 Route::get('/Age',  [
 	'middleware' => 'Age',
-	'uses' => 'TestController@index'
-	] 
+  'uses' => 'TestController@index'
+	]
 );
 
 Route::get('/logout',function(){
@@ -51,8 +51,13 @@ Route::post('/logout',[
 
 Route::get('/orders',[
 	'middleware' => 'LoggedMiddleware',
-	'uses' => 'OrderController@index']
+	'uses' => 'OrderController@userOrders']
 	);
+
+Route::get('/manage/orders',[
+  	'middleware' => 'AdminMiddleware',
+  	'uses' => 'OrderController@adminOrders']
+  	);
 
 Route::get('/uploadProduct',[
 	'middleware' => 'AdminMiddleware',
@@ -63,4 +68,3 @@ Route::post('/uploadProduct',[
 	'middleware' => 'AdminMiddleware',
 	'uses' => 'ProductController@uploadProduct']
 	);
-
