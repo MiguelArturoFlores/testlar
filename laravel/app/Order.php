@@ -14,4 +14,9 @@ class Order extends Model
     public function user() {
         return $this->belongsTo('testmiguel\User','user_id','id');
     }
+
+    // each order can have many products
+    public function products() {
+        return $this->belongsToMany('testmiguel\Product', 'storeproductorder', 'order_id', 'product_id');
+    }
 }

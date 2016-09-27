@@ -54,10 +54,16 @@ Route::get('/orders',[
 	'uses' => 'OrderController@userOrders']
 	);
 
-Route::get('/manage/orders',[
-  	'middleware' => 'AdminMiddleware',
+  Route::get('/manage/orders',[
+  	'middleware' => 'LoggedMiddleware',
   	'uses' => 'OrderController@adminOrders']
   	);
+
+  Route::get('/manage/orders/{id}',[
+    'middleware' => 'LoggedMiddleware',
+    'uses' => 'OrderController@adminDetailOrder']
+    );
+
 
 Route::get('/uploadProduct',[
 	'middleware' => 'AdminMiddleware',

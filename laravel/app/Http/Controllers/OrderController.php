@@ -28,4 +28,11 @@ class OrderController extends Controller
       //var_dump($orders);
       return view('adminOrders', ['orders' => $orders]);
     }
+
+    public function adminDetailOrder (Request $request, $id){
+
+        $order = Order::findOrFail($id);
+
+        return view('adminDetailOrder',['order' => $order]);
+    }
 }

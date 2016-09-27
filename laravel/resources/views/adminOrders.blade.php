@@ -9,7 +9,7 @@
 
       <div class="container">
         @foreach ($orders as $order)
-            {{ $order->id }} {{$order->user->name}}
+            {{ $order->id }} {{$order->user->name}} <a href="{{$order->id}}"> detail </a>
             <br>
         @endforeach
       </div>
