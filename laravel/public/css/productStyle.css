@@ -1,0 +1,53 @@
+.darkenImage {
+    background-color: #1f648b;
+}
+
+.undarkenImage {
+    background-color: white;
+}
+
+.buttonShoppingCar {
+    background-color: green;
+    width: 100px;
+    height: 60px;
+    float: right;
+}
+
+.buttonCloseShoppingCar {
+    width: 100px;
+    height: 60px;
+    background-color: yellow;
+    float: right;
+}
+
+.openBasket {
+    background-color: #2ab27b;
+    width: 25%;
+    min-height: 100%;
+    float: right;
+    display: inline;
+}
+
+.buttonCloseShoppingCarClose div {
+    width: 0%;
+}
+
+.closeBasket {
+    display: none;
+}
+
+.invisible {
+    display: none;
+}
+
+.productListWithBasket {
+    width: 75%;
+}
+
+.productListWithOutBasket {
+    width: 100%;
+}
+
+.basketProductList {
+    width: 100%;
+}
