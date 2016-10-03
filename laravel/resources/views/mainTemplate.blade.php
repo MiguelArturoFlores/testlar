@@ -12,7 +12,7 @@
 @section('header')
 
     <div class="mainHeader">
-        @if(session()->has('session-token'))
+        @if(Auth::check())
             @include('logged.headerLogged')
         @else
             @include('not-logged.headerNotLogged')

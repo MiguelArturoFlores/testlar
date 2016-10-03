@@ -25,9 +25,10 @@ class LoginController extends Controller
   		}
 
   		if(Auth::attempt(['email'=>$email, 'password' => $password ])){
-  			echo 'LOGED';
+  			return redirect("/");
   		} else {
-  			echo 'NOT LOGED';
+			//add error when try to login
+			return redirect('/login');
   		}
 
   	}

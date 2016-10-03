@@ -23,9 +23,9 @@ class OrderController extends Controller
     }
 
     public function adminOrders (Request $request){
-      $orders = Order::paginate(3);
-      //$orders = DB::table('storeorder')->paginate(2);
-      //var_dump($orders);
+        $orders = Order::paginate(3);
+        //$orders = DB::table('storeorder')->paginate(2);
+        //var_dump($orders);
       return view('adminOrders', ['orders' => $orders]);
     }
 

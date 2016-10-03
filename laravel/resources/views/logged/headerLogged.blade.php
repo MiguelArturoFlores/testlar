@@ -16,7 +16,13 @@
     </div>
 </a>
 
-<div style="width: 39%; display: inline-block;">
+<a href="/logout">
+    <div style="width: 20%; display: inline-block; background-color: #2ab27b; text-align: center;">
+        log out
+    </div>
+</a>
+
+<div style="width: 15%; display: inline-block;">
     <div id="buttonBasket" class="buttonShoppingCar" onclick="openBasket()">
 
     </div>

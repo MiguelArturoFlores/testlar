@@ -12,65 +12,72 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('contactView');
 });
+
+Route::get('/contacto', ['uses' => 'ContactController@index']);
+
+Route::get('/nosotros', ['uses' => 'AboutController@index']);
+
+Route::get('/', ['uses' => 'ProductController@productUserList']);
+
 
 Route::get('/1', function () {
     return 'welcome 1';
 });
 
-Route::post('/login','LoginController@loginUser');
-Route::get('/login',function(){
-   return view('login');
+Route::post('/login', 'LoginController@loginUser');
+Route::get('/login', function () {
+    return view('login');
 });
 
-Route::get('/cookie/set','CookieController@setCookie');
-Route::get('/cookie/get','CookieController@getCookie');
+Route::get('/cookie/set', 'CookieController@setCookie');
+Route::get('/cookie/get', 'CookieController@getCookie');
 
-Route::post('/user/register',array('uses'=>'UserRegisterController@postRegister'));
-Route::get('/user/register',function(){
-	return view('register');
+Route::post('/user/register', array('uses' => 'UserRegisterController@postRegister'));
+Route::get('/user/register', function () {
+    return view('register');
 });
 
-Route::get('/db/testinsert','UserRegisterController@insertTest');
+Route::get('/db/testinsert', 'UserRegisterController@insertTest');
 
-Route::get('/Age',  [
-	'middleware' => 'Age',
-  'uses' => 'TestController@index'
-	]
+Route::get('/Age', [
+        'middleware' => 'Age',
+        'uses' => 'TestController@index'
+    ]
 );
 
-Route::get('/logout',function(){
-   return view('logout');
+Route::get('/logout', function () {
+    return view('logout');
 })->middleware(LoggedMiddleware::class);
 
-Route::post('/logout',[
-	'middleware' => 'LoggedMiddleware',
-	'uses' => 'LoginController@logout']
-	);
+Route::post('/logout', [
+        'middleware' => 'LoggedMiddleware',
+        'uses' => 'LoginController@logout']
+);
 
-Route::get('/orders',[
-	'middleware' => 'LoggedMiddleware',
-	'uses' => 'OrderController@userOrders']
-	);
+Route::get('/orders', [
+        'middleware' => 'LoggedMiddleware',
+        'uses' => 'OrderController@userOrders']
+);
 
-  Route::get('/manage/orders',[
-  	'middleware' => 'LoggedMiddleware',
-  	'uses' => 'OrderController@adminOrders']
-  	);
+Route::get('/manage/orders', [
+        'middleware' => 'LoggedMiddleware',
+        'uses' => 'OrderController@adminOrders']
+);
 
-  Route::get('/manage/orders/{id}',[
-    'middleware' => 'LoggedMiddleware',
-    'uses' => 'OrderController@adminDetailOrder']
-    );
+Route::get('/manage/orders/{id}', [
+        'middleware' => 'LoggedMiddleware',
+        'uses' => 'OrderController@adminDetailOrder']
+);
 
 
-Route::get('/uploadProduct',[
-	'middleware' => 'AdminMiddleware',
-	'uses' => 'ProductController@index']
-	);
+Route::get('/uploadProduct', [
+        'middleware' => 'AdminMiddleware',
+        'uses' => 'ProductController@index']
+);
 
-Route::post('/uploadProduct',[
-	'middleware' => 'AdminMiddleware',
-	'uses' => 'ProductController@uploadProduct']
-	);
+Route::post('/uploadProduct', [
+        'middleware' => 'AdminMiddleware',
+        'uses' => 'ProductController@uploadProduct']
+);
