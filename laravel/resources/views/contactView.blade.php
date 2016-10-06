@@ -7,5 +7,7 @@
 @stop
 
 @section('content')
-    Contactanos
+    <div>
+        Contactanos
+  </div>
 @stop
