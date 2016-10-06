@@ -13,19 +13,25 @@ function insertBasketProduct(id, name, description, photo) {
     if (productIsAlreadyOnBasket(product)) {
         document.getElementById('productQuantity' + id).innerHTML = product.quantity.toString();
     } else {
-
-        productList.splice(productList.length, 0, product);
-
-        var basket = document.getElementById('basketProductList');
-
-        var basketProductDiv = document.createElement('div');
-        basketProductDiv.id = id;
-        basketProductDiv.innerHTML = '<img width="100" height="100" src="' + photo + '">' +
-            '<div id="productQuantity' + id + '"> ' + product.quantity + '</div>';
-
-        basket.appendChild(basketProductDiv);
+      addProductToBasket(product);
     }
 }
+
+function addProductToBasket(product){
+
+    productList.splice(productList.length, 0, product);
+
+    var basket = document.getElementById('basketProductList');
+
+    var basketProductDiv = document.createElement('div');
+    basketProductDiv.id = product.id;
+    //TODO must insert and then change the values
+    basketProductDiv.innerHTML = '<img width="100" height="100" src="' + product.photo + '">' +
+        '<div id="productQuantity' + product.id + '"> ' + product.quantity + '</div>';
+
+    basket.appendChild(basketProductDiv);
+}
+
 
 function productIsAlreadyOnBasket(product) {
     for (index = 0; index < productList.length; ++index) {
