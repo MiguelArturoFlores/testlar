@@ -3,3 +3,5 @@
 </div>
 <div id="basketProductList" class="basketProductList">
 </div>
+<div id="buttonClearBasket" class="buttonClearBasket" onclick="clearBasket()">
+</div>
