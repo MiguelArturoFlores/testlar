@@ -10,30 +10,29 @@ use Auth;
 
 class LoginController extends Controller
 {
-  	public function loginUser (Request $request){
+    public function loginUser(Request $request)
+    {
 
-  		$email = 'miguel@abc.com';
-  		$password = '123456';
+        $email = $request->input('email');
+        $password = $request->input('password');
 
-		$email = $request->input('email');
-		$password = $request->input('password');
+        if (Auth::check()) {
+            if (Auth::user()->email != $email) {
+                Auth::logout();
+            }
+        }
 
-  		if(Auth::check()){
-  			if(Auth::user()->email != $email){
-  				Auth::logout();
-  			}
-  		}
+        if (Auth::attempt(['email' => $email, 'password' => $password])) {
+            return redirect("/");
+        } else {
+            //add error when try to login
+            return redirect('/login');
+        }
 
-  		if(Auth::attempt(['email'=>$email, 'password' => $password ])){
-  			return redirect("/");
-  		} else {
-			//add error when try to login
-			return redirect('/login');
-  		}
+    }
 
-  	}
-
-    public function logout (Request $request){
+    public function logout(Request $request)
+    {
         Auth::logout();
         return redirect('/login');
     }

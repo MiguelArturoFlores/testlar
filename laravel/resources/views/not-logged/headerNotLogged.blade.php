@@ -23,7 +23,7 @@
 </a>
 
 <div style="width: 15%; display: inline-block;">
-    <div id="buttonBasket" class="buttonShoppingCar" onclick="openBasket()">
+    <div id="buttonBasket" class="buttonShoppingCar" onclick="openBasketButton()">
 
     </div>
 </div>

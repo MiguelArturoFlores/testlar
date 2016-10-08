@@ -16,14 +16,15 @@
     </div>
 </a>
 
-<a href="/logout">
-    <div style="width: 20%; display: inline-block; background-color: #2ab27b; text-align: center;">
-        log out
-    </div>
-</a>
+<div style="width: 20%; display: inline-block; background-color: #2ab27b; text-align: center;">
+    <form action="/logout" method="post">
+        <input type="hidden" name="_token" value="<?php echo csrf_token() ?>">
+        <input type="submit" value="Logout"/>
+    </form>
+</div>
 
 <div style="width: 15%; display: inline-block;">
-    <div id="buttonBasket" class="buttonShoppingCar" onclick="openBasket()">
+    <div id="buttonBasket" class="buttonShoppingCar" onclick="openBasketButton()">
 
     </div>
 </div>

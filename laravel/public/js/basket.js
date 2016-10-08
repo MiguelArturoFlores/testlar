@@ -1,7 +1,7 @@
 var productList = new Array();
 
-document.addEventListener('DOMContentLoaded', function() {
-   loadBasketProductsLocaly();
+document.addEventListener('DOMContentLoaded', function () {
+    loadBasketProductsLocaly();
 }, false);
 
 function insertBasketProduct(id, name, description, photo) {
@@ -16,6 +16,7 @@ function insertBasketProduct(id, name, description, photo) {
 
     if (productIsAlreadyOnBasket(product)) {
         document.getElementById('productQuantity' + id).innerHTML = product.quantity.toString();
+        openBasket();
         updateCookieProduct(product);
     } else {
         productList.push(product);
@@ -26,22 +27,22 @@ function insertBasketProduct(id, name, description, photo) {
 
 function hasBasketProducts() {
     var basketProducts = Cookies.get('basketProducts');
-    if(basketProducts == null){
+    if (basketProducts == null) {
         return false;
     }
     return true;
 }
 
-function addCookieProduct(product){
-    Cookies.set('basketProducts',JSON.stringify(productList));
+function addCookieProduct(product) {
+    Cookies.set('basketProducts', JSON.stringify(productList));
 }
 
-function updateCookieProduct(product){
-    Cookies.set('basketProducts',JSON.stringify(productList));
+function updateCookieProduct(product) {
+    Cookies.set('basketProducts', JSON.stringify(productList));
 }
 
-function loadBasketProductsLocaly(){
-    if(!hasBasketProducts()){
+function loadBasketProductsLocaly() {
+    if (!hasBasketProducts()) {
         productList = new Array();
         return;
     }
@@ -56,7 +57,7 @@ function loadBasketProductsLocaly(){
 
 }
 
-function clearBasket(){
+function clearBasket() {
     Cookies.remove('basketProducts');
     var basket = document.getElementById('basketProductList');
     productList = new Array();
@@ -65,7 +66,7 @@ function clearBasket(){
     }
 }
 
-function addProductToBasket(product){
+function addProductToBasket(product) {
     var basket = document.getElementById('basketProductList');
     var basketProductDiv = document.createElement('div');
     basketProductDiv.id = product.id;
@@ -73,6 +74,7 @@ function addProductToBasket(product){
     basketProductDiv.innerHTML = '<img width="100" height="100" src="' + product.photo.toString() + '">' +
         '<div id="productQuantity' + product.id.toString() + '"> ' + product.quantity.toString() + '</div>';
     basket.appendChild(basketProductDiv);
+    openBasket();
 }
 
 function productIsAlreadyOnBasket(product) {
@@ -84,4 +86,8 @@ function productIsAlreadyOnBasket(product) {
         }
     }
     return false;
+}
+
+function checkoutBasket(){
+    window.location = "http://localhost:8000/checkout";
 }

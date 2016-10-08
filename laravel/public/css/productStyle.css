@@ -6,36 +6,6 @@
     background-color: white;
 }
 
-.buttonShoppingCar {
-    background-color: green;
-    width: 100px;
-    height: 60px;
-    float: right;
-}
-
-.buttonCloseShoppingCar {
-    width: 100px;
-    height: 60px;
-    background-color: yellow;
-    float: right;
-}
-
-.openBasket {
-    background-color: #2ab27b;
-    width: 25%;
-    min-height: 100%;
-    float: right;
-    display: inline;
-}
-
-.buttonCloseShoppingCarClose div {
-    width: 0%;
-}
-
-.closeBasket {
-    display: none;
-}
-
 .invisible {
     display: none;
 }
@@ -48,6 +18,21 @@
     width: 100%;
 }
 
-.basketProductList {
+.productGridDetailButton {
+    width: 40%;
+    height: 50px;
+    background-color: yellow;
+    display: inline-block;
+}
+
+.productGridAddProductButton {
+    width: 20%;
+    height: 50px;
+    background-color: purple;
+    display: inline-block;
+}
+
+.divProductGridOptions {
     width: 100%;
+    height: 60px;
 }

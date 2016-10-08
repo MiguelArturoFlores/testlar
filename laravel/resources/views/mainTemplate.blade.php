@@ -6,9 +6,9 @@
     <script type="text/javascript" src="{{ URL::asset('js/cookieManager/js.cookie.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/productList.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/basket.js') }}"></script>
-
     <script type="text/javascript" src="{{ URL::asset('js/onLoadStore.js') }}"></script>
 
+    <link rel="stylesheet" href="{{ URL::asset('css/loginStyle.css') }}"/>
     <link rel="stylesheet" href="{{ URL::asset('css/productStyle.css') }}"/>
     <link rel="stylesheet" href="{{ URL::asset('css/mainStyle.css') }}"/>
     <link rel="stylesheet" href="{{ URL::asset('css/basketStyle.css') }}"/>
@@ -33,7 +33,7 @@
     </div>
     <div id="productListDiv" class="productListWithOutBasket">
         @yield('content')
-   </div>
+    </div>
 </div>
 
 </body>

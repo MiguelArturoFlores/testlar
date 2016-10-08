@@ -18,7 +18,7 @@ class ProductController extends Controller
 
     public function productUserList(Request $request)
     {
-        $products = Product::paginate(3);
+        $products = Product::paginate(9);
         //$orders = DB::table('storeorder')->paginate(2);
         //var_dump($orders);
         $products = $this->createProductViewList($products);
