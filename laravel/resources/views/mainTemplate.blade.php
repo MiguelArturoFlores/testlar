@@ -7,11 +7,15 @@
     <script type="text/javascript" src="{{ URL::asset('js/productList.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/basket.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/onLoadStore.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/detailProductDialog.js') }}"></script>
 
     <link rel="stylesheet" href="{{ URL::asset('css/loginStyle.css') }}"/>
     <link rel="stylesheet" href="{{ URL::asset('css/productStyle.css') }}"/>
     <link rel="stylesheet" href="{{ URL::asset('css/mainStyle.css') }}"/>
     <link rel="stylesheet" href="{{ URL::asset('css/basketStyle.css') }}"/>
+    <link rel="stylesheet" href="{{ URL::asset('css/dialogStyle.css') }}"/>
+    @section('includes')
+    @show
 </head>
 <body>
 
@@ -35,6 +39,8 @@
         @yield('content')
     </div>
 </div>
+
+@include('dialog/detailProduct')
 
 </body>
 </html>

@@ -1,4 +1,4 @@
-<a href="/">
+<a href="/store">
     <div style="width: 20%; display: inline-block; background-color: #2ab27b; text-align: center;">
         tienda
     </div>

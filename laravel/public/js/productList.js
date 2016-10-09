@@ -10,10 +10,6 @@ function onProductOut(name, id) {
     document.getElementById('divProductGrid' + id).className = 'invisible';
 }
 
-function showDetailProduct(product) {
-    alert(product.id);
-}
-
 function openBasketButton() {
     if (document.getElementById('basketDiv').className == 'openBasket') {
         closeBasket();
@@ -26,7 +22,6 @@ function openBasket() {
     Cookies.set('isBasketOpen', 'true');
     document.getElementById('productListDiv').className = 'productListWithBasket';
     document.getElementById('basketDiv').className = 'openBasket';
-    //document.getElementById('buttonBasket').className = 'buttonCloseShoppingCarClose'ó
 }
 
 function closeBasket() {
@@ -36,4 +31,8 @@ function closeBasket() {
         document.getElementById('basketDiv').className = 'closeBasket';
         document.getElementById('buttonBasket').className = 'buttonShoppingCar'
     }
+}
+
+function detailProductRedirect(product) {
+    window.location = "http://localhost:8000/store/detail/"+ product.id;
 }
