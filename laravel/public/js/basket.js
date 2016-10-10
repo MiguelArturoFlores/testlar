@@ -4,18 +4,19 @@ document.addEventListener('DOMContentLoaded', function () {
     loadBasketProductsLocaly();
 }, false);
 
-function insertBasketProduct(id, name, description, photo) {
+function insertBasketProduct(productToAdd) {
 
     var product = {
-        id: id,
-        name: name,
-        description: description,
-        photo: photo,
-        quantity: 1
+        id: productToAdd.id,
+        name: productToAdd.name,
+        description: productToAdd.description,
+        photo: productToAdd.image,
+        quantity: 1,
+        size : ''
     };
 
     if (productIsAlreadyOnBasket(product)) {
-        document.getElementById('productQuantity' + id).innerHTML = product.quantity.toString();
+        document.getElementById('productQuantity' + product.id).innerHTML = product.quantity;
         openBasket();
         updateCookieProduct(product);
     } else {
@@ -51,10 +52,15 @@ function loadBasketProductsLocaly() {
     productList = new Array();
     productList = JSON.parse(basketProducts);
 
+    var isBasketOpen = Cookies.get('isBasketOpen');
+
     for (index = 0; index < productList.length; ++index) {
         addProductToBasket(productList[index]);
     }
 
+    if (isBasketOpen == 'false') {
+        closeBasket();
+    }
 }
 
 function clearBasket() {
@@ -71,7 +77,7 @@ function addProductToBasket(product) {
     var basketProductDiv = document.createElement('div');
     basketProductDiv.id = product.id;
     //TODO must insert and then change the values
-    basketProductDiv.innerHTML = '<img width="100" height="100" src="' + product.photo.toString() + '">' +
+    basketProductDiv.innerHTML = '<img width="100" height="100" src="uploads/' + product.photo.toString() + '">' +
         '<div id="productQuantity' + product.id.toString() + '"> ' + product.quantity.toString() + '</div>';
     basket.appendChild(basketProductDiv);
     openBasket();
@@ -88,6 +94,6 @@ function productIsAlreadyOnBasket(product) {
     return false;
 }
 
-function checkoutBasket(){
+function checkoutBasket() {
     window.location = "http://localhost:8000/checkout";
 }

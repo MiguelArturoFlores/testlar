@@ -19,12 +19,9 @@ Route::get('/contacto', ['uses' => 'ContactController@index']);
 
 Route::get('/nosotros', ['uses' => 'AboutController@index']);
 
-Route::get('/', ['uses' => 'ProductController@productUserList']);
+Route::get('/store', ['uses' => 'ProductController@productUserList']);
 
-
-Route::get('/1', function () {
-    return 'welcome 1';
-});
+Route::get('/', ['uses' => 'StoreController@index']);
 
 Route::post('/login', 'LoginController@loginUser');
 Route::get('/login', function () {
