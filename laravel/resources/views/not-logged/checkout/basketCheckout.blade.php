@@ -4,7 +4,7 @@
 </script>
 @for ($i = 0; $i < count($productList); $i++)
     <script>
-        addProductToBasketAux('{!! $productList[$i] !!}');
+        addProductToBasketCheckout('{!! $productList[$i] !!}');
     </script>
 @endfor
 

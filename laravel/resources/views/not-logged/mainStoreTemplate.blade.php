@@ -3,6 +3,7 @@
 <head>
     <title>@yield('mainTitle')</title>
     <script src="jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/utils.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/cookieManager/js.cookie.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/productList.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/basket.js') }}"></script>

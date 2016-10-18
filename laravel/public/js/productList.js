@@ -20,8 +20,14 @@ function openBasketButton() {
 
 function openBasket() {
     Cookies.set('isBasketOpen', 'true');
-    document.getElementById('productListDiv').className = 'productListWithBasket';
-    document.getElementById('basketDiv').className = 'openBasket';
+    var productListDiv = document.getElementById('productListDiv');
+    if (productListDiv != null) {
+        productListDiv.className = 'productListWithBasket';
+    }
+    var basketDiv = document.getElementById('basketDiv');
+    if (basketDiv != null) {
+        basketDiv.className = 'openBasket';
+    }
 }
 
 function closeBasket() {
@@ -34,5 +40,5 @@ function closeBasket() {
 }
 
 function detailProductRedirect(product) {
-    window.location = "http://localhost:8000/store/detail/"+ product.id;
+    window.location = "http://localhost:8000/store/detail/" + product.id;
 }
