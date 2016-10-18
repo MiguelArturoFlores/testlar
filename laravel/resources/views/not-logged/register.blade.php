@@ -20,6 +20,21 @@
         </tr>
 
         <tr>
+            <td>cellphone</td>
+            <td><input type="text" name="cellphone"/></td>
+        </tr>
+
+        <tr>
+            <td>Country</td>
+            <td><input type="text" name="country" value="Colombia" readonly/></td>
+        </tr>
+
+        <tr>
+            <td>State</td>
+            <td>{{Form::select('state',$stateList)}}</td>
+        </tr>
+
+        <tr>
             <td>email</td>
             <td><input type="text" name="email"/></td>
         </tr>

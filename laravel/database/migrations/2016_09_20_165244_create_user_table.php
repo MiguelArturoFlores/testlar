@@ -20,6 +20,9 @@ class CreateUserTable extends Migration
                 $table->string('email')->unique();
                 $table->string('password');
                 $table->string('address');
+                $table->string('cellphone');
+                $table->string('country');
+                $table->string('country_state');
                 $table->integer('default_role')->default(0);
                 $table->rememberToken();
                 $table->timestamps();

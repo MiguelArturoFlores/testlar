@@ -11,9 +11,16 @@ function insertBasketProduct(productToAdd) {
         name: productToAdd.name,
         description: productToAdd.description,
         photo: productToAdd.image,
+        price: productToAdd.price,
+        totalPrice: productToAdd.price,
         quantity: 1,
-        size : ''
+        size: ''
     };
+
+    if (productToAdd.quantity != null && productToAdd.quantity != '') {
+        product.quantity = productToAdd.quantity;
+        productToAdd.price = productToAdd.price * productToAdd.quantity;
+    }
 
     if (productIsAlreadyOnBasket(product)) {
         document.getElementById('productQuantity' + product.id).innerHTML = product.quantity;
@@ -67,20 +74,28 @@ function clearBasket() {
     Cookies.remove('basketProducts');
     var basket = document.getElementById('basketProductList');
     productList = new Array();
-    while (basket.hasChildNodes()) {
-        basket.removeChild(basket.lastChild);
+    if (basket != null) {
+        while (basket.hasChildNodes()) {
+            basket.removeChild(basket.lastChild);
+        }
     }
+}
+function addProductToBasketAux(product) {
+    var pro = JSON.parse(product);
+    insertBasketProduct(pro);
 }
 
 function addProductToBasket(product) {
     var basket = document.getElementById('basketProductList');
-    var basketProductDiv = document.createElement('div');
-    basketProductDiv.id = product.id;
-    //TODO must insert and then change the values
-    basketProductDiv.innerHTML = '<img width="100" height="100" src="uploads/' + product.photo.toString() + '">' +
-        '<div id="productQuantity' + product.id.toString() + '"> ' + product.quantity.toString() + '</div>';
-    basket.appendChild(basketProductDiv);
-    openBasket();
+    if (basket != null) {
+        var basketProductDiv = document.createElement('div');
+        basketProductDiv.id = product.id;
+        //TODO must insert and then change the values
+        basketProductDiv.innerHTML = '<img width="100" height="100" src="../uploads/' + product.photo.toString() + '">' +
+            '<div id="productQuantity' + product.id.toString() + '"> ' + product.quantity.toString() + '</div>';
+        basket.appendChild(basketProductDiv);
+        openBasket();
+    }
 }
 
 function productIsAlreadyOnBasket(product) {
@@ -94,6 +109,62 @@ function productIsAlreadyOnBasket(product) {
     return false;
 }
 
+function findProductById(id) {
+    for (index = 0; index < productList.length; ++index) {
+        if (productList[index].id == id) {
+            return productList[index];
+        }
+    }
+    return null;
+}
+
 function checkoutBasket() {
     window.location = "http://localhost:8000/checkout";
+}
+
+function onIncrementCheckoutBasketProduct(productId) {
+    changeProductQuantity(1, productId);
+    updateTotalCheckoutPrice()
+}
+
+function onDecrementCheckoutBasketProduct(productId) {
+    changeProductQuantity(-1, productId);
+    updateTotalCheckoutPrice()
+}
+
+function changeProductQuantity(quantity, productId) {
+    var productQuantity = document.getElementById('productQuantity' + productId);
+    if (productQuantity != null) {
+        var product = findProductById(productId);
+        if (product != null) {
+            if (product.quantity + quantity < 1) {
+                product.quantity = 1;
+            } else if (product.quantity + quantity > 12) {
+                product.quantity = 12
+            } else {
+                product.quantity = product.quantity + quantity;
+            }
+            product.totalPrice = product.price * product.quantity;
+            updateCookieProduct(product);
+
+            var productPrice = document.getElementById('productPrice' + productId);
+            if (productPrice != null) {
+                productPrice.innerHTML = product.totalPrice;
+            }
+            productQuantity.setAttribute("value", product.quantity);
+        }
+    }
+}
+
+function updateTotalCheckoutPrice() {
+
+    var totalPriceHtml = document.getElementById('checkoutTotalPayment');
+    if (totalPriceHtml != null) {
+        var totalPrice = 0;
+        for (index = 0; index < productList.length; ++index) {
+            totalPrice = Number(productList[index].totalPrice) + Number(totalPrice);
+        }
+        totalPriceHtml.innerHTML = totalPrice;
+    }
+
 }

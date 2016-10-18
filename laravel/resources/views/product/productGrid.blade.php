@@ -1,7 +1,7 @@
 <div id="image{{$product->id}}" class="undarkenImage" align="center"
      onmouseout="onProductOut('{{$product->name}}','{{$product->id}}')"
      onmouseover="onProductOver('{{$product->name}}','{{$product->id}}')">
-    <img src="uploads/{{ $product->image }}" width="200" height="200"
+    <img src="../uploads/{{ $product->image }}" width="200" height="200"
          onclick="showDetailProduct({{$product}})">
 
     <div id="divProductGrid{{$product->id}}" class="invisible">

@@ -36,3 +36,21 @@
     width: 100%;
     height: 60px;
 }
+
+.productBasketGeneralDiv {
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+}
+
+.productBasketImageDiv {
+    display: inline-block;
+    vertical-align: top;
+    width: 30%;
+}
+
+.productBasketNameDiv {
+    display: inline-block;
+    vertical-align: top;
+    width: 69%;
+}

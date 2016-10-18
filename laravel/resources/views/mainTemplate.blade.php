@@ -1,26 +1,14 @@
-<html>
+@extends('not-logged/mainStoreTemplate')
 
-<head>
-    <title>@yield('title')</title>
-    <script src="jquery-1.12.4.min.js"></script>
-    <script type="text/javascript" src="{{ URL::asset('js/cookieManager/js.cookie.js') }}"></script>
-    <script type="text/javascript" src="{{ URL::asset('js/productList.js') }}"></script>
-    <script type="text/javascript" src="{{ URL::asset('js/basket.js') }}"></script>
-    <script type="text/javascript" src="{{ URL::asset('js/onLoadStore.js') }}"></script>
-    <script type="text/javascript" src="{{ URL::asset('js/detailProductDialog.js') }}"></script>
+@section('mainTitle')
+    @yield('title')
+@stop
 
-    <link rel="stylesheet" href="{{ URL::asset('css/loginStyle.css') }}"/>
-    <link rel="stylesheet" href="{{ URL::asset('css/productStyle.css') }}"/>
-    <link rel="stylesheet" href="{{ URL::asset('css/mainStyle.css') }}"/>
-    <link rel="stylesheet" href="{{ URL::asset('css/basketStyle.css') }}"/>
-    <link rel="stylesheet" href="{{ URL::asset('css/dialogStyle.css') }}"/>
-    @section('includes')
-    @show
-</head>
-<body>
+@section('mainIncludes')
+    @yield('includes')
+@stop
 
-@section('header')
-
+@section('mainHeader')
     <div class="mainHeader">
         @if(Auth::check())
             @include('logged.headerLogged')
@@ -28,19 +16,18 @@
             @include('not-logged.headerNotLogged')
         @endif
     </div>
+@stop
 
-@show
+@section('mainContent')
 
-<div class="container">
-    <div id="basketDiv" class="closeBasket">
-        @include('basket.basket')
+    <div class="container">
+        <div id="basketDiv" class="closeBasket">
+            @include('basket.basket')
+        </div>
+        <div id="productListDiv" class="productListWithOutBasket">
+            @yield('content')
+        </div>
     </div>
-    <div id="productListDiv" class="productListWithOutBasket">
-        @yield('content')
-    </div>
-</div>
 
-@include('dialog/detailProduct')
+@stop
 
-</body>
-</html>
