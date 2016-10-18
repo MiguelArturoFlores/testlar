@@ -20,7 +20,7 @@ window.onclick = function (event) {
 
 function bindProductData(product) {
     var image = document.getElementById('detailProductDialogProductImage');
-    image.src = "uploads/" + product.image.toString();
+    image.src = "../uploads/" + product.image.toString();
     var description = document.getElementById('detailProductDialogProductDescription');
     description.innerHTML = "" + product.description;
 }

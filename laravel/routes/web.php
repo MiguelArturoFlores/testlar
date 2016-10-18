@@ -24,9 +24,7 @@ Route::get('/store', ['uses' => 'ProductController@productUserList']);
 Route::get('/', ['uses' => 'StoreController@index']);
 
 Route::post('/login', 'LoginController@loginUser');
-Route::get('/login', function () {
-    return view('login');
-});
+Route::get('/login', 'UserRegisterController@indexRegister');
 
 Route::get('/cookie/set', 'CookieController@setCookie');
 Route::get('/cookie/get', 'CookieController@getCookie');
@@ -78,3 +76,9 @@ Route::post('/uploadProduct', [
         'middleware' => 'AdminMiddleware',
         'uses' => 'ProductController@uploadProduct']
 );
+
+Route::get('/checkout', [
+        'uses' => 'CheckoutController@index']
+);
+
+
