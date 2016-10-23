@@ -2,6 +2,16 @@
     background-color: #1f648b;
 }
 
+.productGridDiv {
+    background-color: white;
+    vertical-align: top;
+}
+
+.productGridCardDiv {
+    background-color: white;
+    width: 220px;
+}
+
 .undarkenImage {
     background-color: white;
 }
@@ -18,18 +28,79 @@
     width: 100%;
 }
 
-.productGridDetailButton {
-    width: 40%;
-    height: 50px;
-    background-color: yellow;
+.productGridNameDiv {
+    font-family: 'Merriweather', serif;
+    font-size: 14pt;
+    margin-top: 8px;
+    line-height: 90%;
+}
+
+.productGridDescriptionDiv {
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.productGridPriceDivGeneral {
+    margin-left: 10px;
+    text-align: left;
+    width: 100%;
+}
+
+.productGridPriceDiv {
+    display: inline-block;
+    width: 60%;
+    margin-top: 5px;
+    font-size: 13px;
+    text-align: left;
+}
+
+.productGridDiscountLabelDiv {
+    width: 30%;
+    display: inline-block;
+    color: blue;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.productGridPriceDivExalted {
+    width: 60%;
+    text-align: left;
+    font-size: 13px;
+    font-weight: bold;
     display: inline-block;
 }
 
-.productGridAddProductButton {
-    width: 20%;
-    height: 50px;
-    background-color: purple;
+.myStoreDropdownDiv {
+    height: 20px;
     display: inline-block;
+    vertical-align: top;
+    margin-top: 6px;
+    width: 45%
+}
+
+.productGridDetailButton {
+    width: 45%;
+    height: 20px;
+    background-color: whitesmoke;
+    display: inline-block;
+    cursor: pointer;
+    margin-top: 6px;
+    vertical-align: top;
+}
+
+.productGridAddProductButton {
+    width: 90%;
+    height: 40px;
+    background-color: #33cc33;
+    display: inline-block;
+    color: white;
+    font-size: 14px;
+    margin-bottom: 12px;
+    margin-top: 10px;
+    cursor: pointer;
 }
 
 .divProductGridOptions {
@@ -50,6 +121,18 @@
 }
 
 .productBasketNameDiv {
+    display: inline-block;
+    vertical-align: top;
+    width: 50%;
+}
+
+.productBasketDeleteDiv {
+    display: inline-block;
+    vertical-align: top;
+    width: 19%;
+}
+
+.productBasketNameCheckoutDiv {
     display: inline-block;
     vertical-align: top;
     width: 69%;

@@ -45,3 +45,10 @@
 .basketProductList {
     width: 100%;
 }
+
+.basketTotalPriceDiv{
+    width: 100%;
+    height: 60px;
+    background-color: #5e5e5e;
+    display: none;
+}

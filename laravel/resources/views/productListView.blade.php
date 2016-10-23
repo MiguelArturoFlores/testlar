@@ -9,7 +9,7 @@
 @section('content')
             <table width="100%">
                 @foreach ($productList as $productRow)
-                    <tr>
+                    <tr valign="top" >
                         @foreach ($productRow as $product)
                             <td width="25%">
                                 @include('product.productGrid')

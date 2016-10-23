@@ -1,0 +1,89 @@
+.headerTitle {
+    font-size: 18px;
+    width: 20%;
+    display: inline-block;
+    text-align: center;
+}
+
+.headerOptionsDiv {
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 15px;
+}
+
+.headerLoginDiv {
+    width: 60%;
+    text-align: right;
+    display: inline-block;
+}
+
+.buttonLoginDiv {
+    width: 100px;
+    height: 40px;
+    display: inline-block;
+    text-align: center;
+    background-color: black;
+    color: white;
+    margin-bottom: 16px;
+    margin-top: 10px;
+}
+
+.buttonLoginDiv:hover {
+    background: gray;
+}
+
+.headerBasketDiv {
+    float: right;
+    width: 100px;
+    height: 40px;
+    display: inline-block;
+    text-align: center;
+    background-color: black;
+    color: white;
+    margin-bottom: 16px;
+    margin-top: 10px;
+}
+
+.headerBasketDiv:hover {
+    background: gray;
+}
+
+.headerCheckoutDiv {
+    float: right;
+    width: 150px;
+    height: 40px;
+    display: inline-block;
+    background-color: black;
+    margin-top: 10px;
+    color: white;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.headerCheckoutDiv:hover {
+    background: seagreen;
+}
+
+.headerMainDiv {
+    width: 100%;
+    background-color: black;
+}
+
+.headerLogoDiv {
+    width: 40%;
+    display: inline-block;
+    font-family: 'Kaushan Script', 'cursive';
+    font-size: 70px;
+    margin-top: 5px;
+    color: white;
+}
+
+.headerLogoSubtitleDiv {
+    font-family: 'Kaushan Script', 'cursive';
+    font-size: 30px;
+    margin-left: 50px;
+    margin-top: -10px;
+    margin-bottom: 8px;
+    color: white;
+}

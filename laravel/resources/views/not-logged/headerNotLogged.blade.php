@@ -1,29 +1,29 @@
-<a href="/store">
-    <div style="width: 20%; display: inline-block; background-color: #2ab27b; text-align: center;">
-        tienda
-    </div>
-</a>
+<div class="headerMainDiv w3-card-2">
 
-<a href="/contacto">
-    <div style="width: 20%; display: inline-block; background-color: #2ab27b; text-align: center;">
-        Contactanos
+    <div class="headerLogoDiv">
+        Bruno Hans
+        <div class="headerLogoSubtitleDiv">
+            Be different
+        </div>
     </div>
-</a>
+    <div class="headerOptionsDiv">
+        <a href="/login">
+            <div class="headerLoginDiv">
+                <div class="buttonLoginDiv w3-card-2 w3-hover-shadow w3-center">
+                    Iniciar Session
+                </div>
+            </div>
+        </a>
 
-<a href="/nosotros">
-    <div style="width: 20%; display: inline-block; background-color: #2ab27b; text-align: center;">
-        Acerca de Nosotros
-    </div>
-</a>
-
-<a href="/login">
-    <div style="width: 20%; display: inline-block; background-color: #2ab27b; text-align: center;">
-        login
-    </div>
-</a>
-
-<div style="width: 15%; display: inline-block;">
-    <div id="buttonBasket" class="buttonShoppingCar" onclick="openBasketButton()">
+        <div id="buttonBasket" class="headerBasketDiv w3-card-2 w3-hover-shadow w3-center" onclick="openBasketButton()">
+            Carrito (0)
+            <div>
+                <img src="/images/shopIcon.png" width="45" height="45"/>
+            </div>
+        </div>
+        <div id="buttonPay" class="headerCheckoutDiv w3-card-2 w3-hover-shadow w3-center">
+            Pagar
+        </div>
 
     </div>
 </div>

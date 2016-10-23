@@ -20,7 +20,7 @@
 
 @section('mainContent')
 
-    <div class="container">
+    <div class="storeMainContainer">
         <div id="basketDiv" class="closeBasket">
             @include('basket.basket')
         </div>

@@ -15,3 +15,12 @@
 <div id="basketProductList" class="basketProductList">
 </div>
 
+<div id="basketTotalPriceDiv" class="basketTotalPriceDiv">
+    <div class="checkoutTotalPaymmentTextDiv">
+        Total Price :
+    </div>
+    <div class="checkoutTotalPaymmentNumberDiv" id="checkoutTotalPayment">
+
+    </div>
+</div>
+

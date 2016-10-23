@@ -18,7 +18,7 @@ class ProductController extends Controller
 
     public function productUserList(Request $request)
     {
-        $products = Product::paginate(9);
+        $products = Product::paginate(30);
         //$orders = DB::table('storeorder')->paginate(2);
         //var_dump($orders);
         $products = $this->createProductViewList($products);
@@ -78,6 +78,12 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->description = $request->description;
         $product->price = $request->price;
+        //TODO take this value from the server
+        $product->small_description = $product->description;
+        $product->discount = 0;
+        $product->has_discount = 0;
+        $product->is_new = 0;
+        //TODO ---------------------------------
         $product->save();
 
         //update product image

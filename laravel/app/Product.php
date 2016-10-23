@@ -8,7 +8,7 @@ use testmiguel\ProductImage;
 class Product extends Model
 {
     //
-    protected $fillable = array('name', 'description', 'image', 'price');
+    protected $fillable = array('name', 'description', 'image', 'price','small_description','discount','has_discount', 'is_new');
     protected $table = 'storeproduct';
 
 	// DEFINE RELATIONSHIPS --------------------------------------------------
