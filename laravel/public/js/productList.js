@@ -35,7 +35,6 @@ function closeBasket() {
         Cookies.set('isBasketOpen', 'false');
         document.getElementById('productListDiv').className = 'productListWithOutBasket';
         document.getElementById('basketDiv').className = 'closeBasket';
-        document.getElementById('buttonBasket').className = 'buttonShoppingCar'
     }
 }
 

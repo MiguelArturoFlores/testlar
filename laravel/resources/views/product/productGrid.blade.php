@@ -39,11 +39,13 @@
         </div>
 
         <div id="divProductGrid{{$product->id}}">
-            <div class="productGridAddProductButton w3-hover-shadow w3-center"
-                 onclick="insertBasketProduct('{{$product}}')">
-                Comprar
-                <div style="display: inline-block; width: 20%">
-                    <img  src="/images/shopIcon.png" width="40" height="40"/>
+            <div class="productGridAddProductButton w3-card-2 w3-hover-shadow w3-center"
+                 onclick="addProductToBasketCheckout('{{$product}}')">
+                <div class="buyButtonTextDiv">
+                    Comprar
+                </div>
+                <div class="buyButtonImageDiv">
+                    <img src="/images/shopIcon.png" width="30" height="30"/>
                 </div>
             </div>
         </div>

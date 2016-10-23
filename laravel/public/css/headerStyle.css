@@ -6,43 +6,68 @@
 }
 
 .headerOptionsDiv {
-    width: 50%;
+    width: 65%;
+    height: 120px;
     display: inline-block;
     vertical-align: top;
     margin-top: 15px;
 }
 
-.headerLoginDiv {
-    width: 60%;
-    text-align: right;
-    display: inline-block;
+.freeShippingHeaderDiv {
+    font-size: 24px;
+    color: white;
+    margin-top: 20px;
 }
 
-.buttonLoginDiv {
-    width: 100px;
-    height: 40px;
+.headerLogoDiv {
+    width: 30%;
+    display: inline-block;
+    font-family: 'Kaushan Script', 'cursive';
+    font-size: 70px;
+    margin-top: 5px;
+    color: white;
+}
+
+.headerGeneralOptionDiv {
     display: inline-block;
     text-align: center;
-    background-color: black;
-    color: white;
-    margin-bottom: 16px;
-    margin-top: 10px;
+    height: 100%;
+    vertical-align: top;
+    width: 50%
+}
+
+.headerLoginDiv {
+    width: 100px;
+    height: 55px;
+    display: inline-block;
+    margin-top: 15px;
+    float: right;
 }
 
 .buttonLoginDiv:hover {
     background: gray;
 }
 
-.headerBasketDiv {
-    float: right;
+.buttonLoginDiv {
     width: 100px;
-    height: 40px;
+    height: 55px;
     display: inline-block;
     text-align: center;
     background-color: black;
     color: white;
     margin-bottom: 16px;
     margin-top: 10px;
+}
+
+.headerBasketDiv {
+    width: 100px;
+    height: 55px;
+    margin-top: 25px;
+    display: inline-block;
+    text-align: center;
+    background-color: black;
+    color: white;
+    float: right;
 }
 
 .headerBasketDiv:hover {
@@ -50,15 +75,14 @@
 }
 
 .headerCheckoutDiv {
-    float: right;
-    width: 150px;
-    height: 40px;
+    width: 100px;
+    height: 55px;
     display: inline-block;
     background-color: black;
-    margin-top: 10px;
+    margin-top: 25px;
     color: white;
     margin-bottom: 16px;
-    text-align: center;
+    float: right;
 }
 
 .headerCheckoutDiv:hover {
@@ -67,16 +91,8 @@
 
 .headerMainDiv {
     width: 100%;
+    height: 140px;
     background-color: black;
-}
-
-.headerLogoDiv {
-    width: 40%;
-    display: inline-block;
-    font-family: 'Kaushan Script', 'cursive';
-    font-size: 70px;
-    margin-top: 5px;
-    color: white;
 }
 
 .headerLogoSubtitleDiv {

@@ -7,23 +7,41 @@
         </div>
     </div>
     <div class="headerOptionsDiv">
-        <a href="/login">
+
+        <div class="headerGeneralOptionDiv">
+            <div class="freeShippingHeaderDiv">
+                ENVIO GRATIS
+            </div>
+        </div>
+        <div class="headerGeneralOptionDiv" style="width: 20%">
             <div class="headerLoginDiv">
-                <div class="buttonLoginDiv w3-card-2 w3-hover-shadow w3-center">
-                    Iniciar Session
+                <a href="/login">
+                    <div class="buttonLoginDiv w3-card-2 w3-hover-shadow w3-center">
+                        Iniciar Session
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="headerGeneralOptionDiv" style="width: 12%">
+            <div id="buttonBasket" class="headerBasketDiv w3-card-2 w3-hover-shadow w3-center"
+                 onclick="openBasketButton()">
+                <div id="buttonBasketText">
+                    Carrito (0)
+                </div>
+                <div>
+                    <img src="/images/shopIcon.png" width="30" height="30"/>
                 </div>
             </div>
-        </a>
-
-        <div id="buttonBasket" class="headerBasketDiv w3-card-2 w3-hover-shadow w3-center" onclick="openBasketButton()">
-            Carrito (0)
-            <div>
-                <img src="/images/shopIcon.png" width="45" height="45"/>
+        </div>
+        <div class="headerGeneralOptionDiv" style="width: 12%">
+            <div id="buttonPay" class="headerCheckoutDiv w3-card-2 w3-hover-shadow w3-center">
+                Pagar
+                <div>
+                    <img src="/images/payIcon.png" width="45" height="45"/>
+                </div>
             </div>
         </div>
-        <div id="buttonPay" class="headerCheckoutDiv w3-card-2 w3-hover-shadow w3-center">
-            Pagar
-        </div>
+
 
     </div>
 </div>
