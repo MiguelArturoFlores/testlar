@@ -41,6 +41,7 @@
     margin-right: 10px;
     text-align: justify;
     text-justify: inter-word;
+    font-weight: normal;
 }
 
 .productGridPriceDivGeneral {
@@ -127,6 +128,7 @@
 .productBasketGeneralDiv {
     display: inline-block;
     vertical-align: top;
+    text-align: left;
     width: 100%;
 }
 
@@ -151,5 +153,34 @@
 .productBasketNameCheckoutDiv {
     display: inline-block;
     vertical-align: top;
-    width: 69%;
+    font-family: 'Merriweather', 'serif';
+    font-weight: bold;
+    font-size: 18px;
+    width: 65%;
+}
+
+.productBasketDescriptionCheckoutDiv {
+    margin-top: 5px;
+    text-align: justify;
+    text-justify: inter-word;
+    font-weight: normal;
+}
+
+.productOptionsDiv {
+    width: 100%;
+    display: inline-block;
+    font-weight: normal;
+    margin-top: 5px;
+}
+
+.productOptionsIncrementerDiv {
+    width: 45%;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+}
+
+.productBasketIncrementerPriceDiv {
+    margin-top: 5px;
+    font-weight: bold;
 }

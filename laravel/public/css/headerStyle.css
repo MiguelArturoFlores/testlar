@@ -23,7 +23,16 @@
     width: 30%;
     display: inline-block;
     font-family: 'Kaushan Script', 'cursive';
-    font-size: 70px;
+    font-size: 50px;
+    margin-top: 5px;
+    color: white;
+}
+
+.headerLogoCheckoutDiv {
+    width: 30%;
+    display: inline-block;
+    font-family: 'Kaushan Script', 'cursive';
+    font-size: 50px;
     margin-top: 5px;
     color: white;
 }
@@ -91,7 +100,13 @@
 
 .headerMainDiv {
     width: 100%;
-    height: 140px;
+    height: 110px;
+    background-color: black;
+}
+
+.headerMainCheckoutDiv{
+    width: 100%;
+    height: 110px;
     background-color: black;
 }
 

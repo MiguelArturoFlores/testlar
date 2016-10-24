@@ -54,13 +54,14 @@ function insertBasketProduct(productToAdd) {
         photo: productToAdd.image,
         price: productToAdd.price,
         totalPrice: productToAdd.price,
+        discount: productToAdd.discount,
         quantity: 1,
         size: ''
     };
 
     if (productToAdd.quantity != null && productToAdd.quantity != '') {
         product.quantity = productToAdd.quantity;
-        productToAdd.totalPrice = productToAdd.price * productToAdd.quantity;
+        productToAdd.totalPrice = (Number(productToAdd.price) - Number(productToAdd.discount)) * productToAdd.quantity;
     }
 
     if (productToAdd.totalPrice != null && productToAdd.totalPrice != '') {
@@ -73,7 +74,7 @@ function insertBasketProduct(productToAdd) {
         updateCookieProduct(product);
     } else {
         productList.push(product);
-        addProductToBasket(product);
+        addProductToBasketVisual(product);
         addCookieProduct(product);
     }
     onBasketChange();
@@ -108,7 +109,7 @@ function loadBasketProductsLocaly() {
     var isBasketOpen = Cookies.get('isBasketOpen');
 
     for (index = 0; index < productList.length; ++index) {
-        addProductToBasket(productList[index]);
+        addProductToBasketVisual(productList[index]);
     }
 
     if (isBasketOpen == 'false') {
@@ -165,7 +166,7 @@ function onRemoveProduct(product) {
     }
 }
 
-function addProductToBasket(product) {
+function addProductToBasketVisual(product) {
     var basket = document.getElementById('basketProductList');
     if (basket != null) {
         var div1 = createDiv('productBasketGeneralDiv', 'productBasket' + product.id);
@@ -254,7 +255,7 @@ function changeProductQuantity(quantity, productId) {
             } else {
                 product.quantity = product.quantity + quantity;
             }
-            product.totalPrice = product.price * product.quantity;
+            product.totalPrice = (Number(product.price) - Number(product.discount)) * product.quantity;
             updateCookieProduct(product);
 
             var productPrice = document.getElementById('productPrice' + productId);
@@ -270,11 +271,26 @@ function changeProductQuantity(quantity, productId) {
 
 function updateTotalCheckoutPrice() {
     var totalPriceHtml = document.getElementById('checkoutTotalPayment');
-    if (totalPriceHtml != null) {
-        var totalPrice = 0;
-        for (index = 0; index < productList.length; ++index) {
-            totalPrice = Number(productList[index].totalPrice) + Number(totalPrice);
-        }
-        totalPriceHtml.innerHTML = totalPrice;
+    var subTotalPriceHtml = document.getElementById('checkoutSubtotalPayment');
+    var discountPriceHtml = document.getElementById('checkoutDiscountPayment');
+
+    var totalPrice = 0;
+    var subTotal = 0;
+
+    for (index = 0; index < productList.length; ++index) {
+        totalPrice = Number(productList[index].totalPrice) + Number(totalPrice);
+        subTotal = Number(productList[index].price) * Number(productList[index].quantity) + Number(subTotal);
     }
+    if (totalPriceHtml != null) {
+        totalPriceHtml.innerHTML = '$ ' + totalPrice + ' COP';
+    }
+    if (subTotalPriceHtml != null) {
+        subTotalPriceHtml.innerHTML = '$ ' + subTotal + ' COP';
+    }
+    var discount = Number(subTotal) - Number(totalPrice);
+    if (discountPriceHtml != null) {
+        discountPriceHtml.innerHTML = '- $ ' + discount + ' COP';
+    }
+
+
 }

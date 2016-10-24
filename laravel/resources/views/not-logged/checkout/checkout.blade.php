@@ -3,7 +3,7 @@
 @section('mainTitle', 'checkout')
 
 @section('mainHeader')
-
+    @include('not-logged.checkout.headerCheckout')
 @stop
 
 @section('mainContent')

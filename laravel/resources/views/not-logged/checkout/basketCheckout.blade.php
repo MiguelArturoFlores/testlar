@@ -1,4 +1,3 @@
-<h2>4 Verifica tu Orden</h2>
 <script>
     clearBasket();
 </script>
@@ -8,28 +7,76 @@
     </script>
 @endfor
 
-@for ($i = 0; $i < count($productList); $i++)
-    <br/>
-    @include('not-logged/basket/basketProduct')
-    <br/>
-@endfor
-
-<br/>
-<div class="checkoutTotalPaymmentDiv">
-
-    <div class="checkoutTotalPaymmentTextDiv">
-        Total Price :
+<div class="checkoutRegisterInfoDiv">
+    <div class="checkoutBuyProcessHeaderNumber">
+        4.
     </div>
-    <div class="checkoutTotalPaymmentNumberDiv" id="checkoutTotalPayment">
+    <div class="checkoutBuyProcessHeaderText">
+        Verifica tu Orden
+    </div>
+    <br/><br/>
+
+    <div class="checkoutPayOrderGeneralDiv w3-card-2">
+
+        <div class="checkoutTotalPaymentTextDiv" style="margin-top: 5px;">
+            Subtotal :
+        </div>
+        <div class="checkoutSubtotalPaymentNumberDiv" id="checkoutSubtotalPayment">
+            25000
+        </div>
+
+        <br/><br/>
+
+        <div class="checkoutTotalPaymentTextDiv">
+            Descuentos :
+        </div>
+        <div class="checkoutDiscountPaymentNumberDiv" id="checkoutDiscountPayment">
+            -20000
+        </div>
+
+        <br/><br/>
+
+        <div class="checkoutTotalPaymentTextDiv">
+            Envio :
+        </div>
+        <div class="checkoutFreePaymentNumberDiv" id="checkoutShipping">
+            GRATIS
+        </div>
+
+        <br/>
+
+        <div class="checkoutHorizontalSeparatorDiv">
+        </div>
+        <br/>
+
+        <div class="checkoutTotalPaymentTextDiv" style="font-size: 14px;font-weight: bold;">
+            Total :
+        </div>
+        <div class="checkoutTotalPaymentNumberDiv" id="checkoutTotalPayment">
+
+        </div>
+
+        <br/><br/>
 
     </div>
+    <div id="finalPayDiv" class="finalPaymentDiv w3-card-2 w3-hover-shadow w3-center">
+        <input id="finalPayButton" hidden type="button" value="PAGAR"/>
+
+        <div id="textPay" class="checkoutFinalPaymentTextDiv">
+            PAGAR
+        </div>
+    </div>
+    <div>
+        <br/>
+        @for ($i = 0; $i < count($productList); $i++)
+            <br/>
+            @include('not-logged/basket/basketProduct')
+            <br/>
+        @endfor
+    </div>
+
 </div>
-<div id="finalPayDiv" class="finalPaymentDiv">
-    <input id="finalPayButton" hidden type="button" value="PAGAR"/>
-    <div id="textPay" style="padding-top: 20px">
-        PAGAR
-    </div>
-</div>
+
 <script>
     updateTotalCheckoutPrice();
 </script>

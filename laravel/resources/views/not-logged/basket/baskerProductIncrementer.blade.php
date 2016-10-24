@@ -3,6 +3,6 @@
        readonly/>
 <input type="button" value="+" onclick="onIncrementCheckoutBasketProduct('{{$productList[$i]->id}}')"/>
 
-<div id="productPrice{{$productList[$i]->id}}">
-    {{$productList[$i]->totalPrice}}
+<div id="productPrice{{$productList[$i]->id}}" class="productBasketIncrementerPriceDiv">
+    $ {{$productList[$i]->totalPrice}} COP
 </div>

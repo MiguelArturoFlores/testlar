@@ -1,5 +1,4 @@
 <div class="headerMainDiv w3-card-2">
-
     <div class="headerLogoDiv">
         Bruno Hans
         <div class="headerLogoSubtitleDiv">
@@ -34,7 +33,7 @@
             </div>
         </div>
         <div class="headerGeneralOptionDiv" style="width: 12%">
-            <div id="buttonPay" class="headerCheckoutDiv w3-card-2 w3-hover-shadow w3-center">
+            <div id="buttonPay" class="headerCheckoutDiv w3-card-2 w3-hover-shadow w3-center" onclick="checkoutBasket();">
                 Pagar
                 <div>
                     <img src="/images/payIcon.png" width="45" height="45"/>
