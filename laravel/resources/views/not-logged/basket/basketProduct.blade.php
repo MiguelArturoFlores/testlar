@@ -9,7 +9,7 @@
         </div>
         <div class="productOptionsDiv">
             <div class="productOptionsIncrementerDiv">
-                @include('not-logged.basket.baskerProductIncrementer')
+                @include('not-logged.basket.basketProductCheckoutIncrementer')
             </div>
             <div class="productOptionsIncrementerDiv">
                 <div class="myStoreDropDownDiv">

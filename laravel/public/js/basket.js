@@ -44,6 +44,8 @@ function validateShowTotalItems() {
 function onBasketChange() {
     validateShowTotalItems();
     validateShowTotalPrice();
+    updateTotalCheckoutPrice();
+    openBasket();
 }
 function insertBasketProduct(productToAdd) {
     //TODO set size
@@ -55,6 +57,7 @@ function insertBasketProduct(productToAdd) {
         price: productToAdd.price,
         totalPrice: productToAdd.price,
         discount: productToAdd.discount,
+        small_description: productToAdd.small_description,
         quantity: 1,
         size: ''
     };
@@ -82,7 +85,7 @@ function insertBasketProduct(productToAdd) {
 
 function hasBasketProducts() {
     var basketProducts = Cookies.get('basketProducts');
-    if (basketProducts == null) {
+    if (basketProducts == null || productList.length <= 0) {
         return false;
     }
     return true;
@@ -166,7 +169,82 @@ function onRemoveProduct(product) {
     }
 }
 
+function addProductToBasketVisualAux(product) {
+
+    var basket = document.getElementById('basketProductList');
+    if (basket != null) {
+        var genericProductToClone = document.getElementById('productBasket');
+        var genericProduct = genericProductToClone.cloneNode(true);
+
+        genericProduct.style.display = '';
+        genericProduct.id = 'productBasket' + product.id;
+
+        var img = getChild(genericProduct, 'IMG', '');
+        img.id = 'productImage' + product.id;
+        img.src = '../uploads/' + product.photo;
+
+        var productName = getChild(genericProduct, 'DIV', 'productMainPageName');
+        productName.id = 'productMainPageName' + product.id;
+        productName.innerHTML = product.name;
+
+        var productDescription = getChild(genericProduct, 'DIV', 'productMainPageDescription');
+        productDescription.id = 'productMainPageDescription' + product.id;
+        productDescription.innerHTML = product.small_description;
+
+        var dropdown = getChild(genericProduct, 'DIV', 'dropdownContent');
+        var item1 = createA();
+        item1.innerHTML = "Talla S";
+        item1.onclick = function (e) {
+            changeProductSizeBasket(product.id, 'S');
+        }
+        dropdown.appendChild(item1);
+
+        var item2 = createA();
+        item2.innerHTML = "Talla M";
+        item2.onclick = function (e) {
+            changeProductSizeBasket(product.id, 'M');
+        }
+        dropdown.appendChild(item2);
+
+        var item3 = createA();
+        item3.innerHTML = "Talla L";
+        item3.onclick = function (e) {
+            changeProductSizeBasket(product.id, 'L');
+        }
+        dropdown.appendChild(item3);
+
+        var deleteDiv = getChild(genericProduct, 'DIV', 'productBasketDeleteDiv');
+        deleteDiv.id = 'productBasketDeleteDiv' + product.id;
+        deleteDiv.onclick = function (e) {
+            onRemoveProduct(product);
+        }
+
+        var quantity = getChild(genericProduct, 'INPUT', 'productQuantity');
+        quantity.id = 'productQuantity' + product.id;
+        quantity.value = product.quantity;
+
+        var quantityIncrementer = getChild(genericProduct, 'INPUT', 'productIncrementerPlus');
+        quantityIncrementer.id = 'productIncrementerPlus' + product.id;
+        quantityIncrementer.onclick = function (e) {
+            onIncrementCheckoutBasketProduct(product.id);
+        }
+
+        var quantityDecrementer = getChild(genericProduct, 'INPUT', 'productIncrementerMinus');
+        quantityDecrementer.id = 'productIncrementerMinus' + product.id;
+        quantityDecrementer.onclick = function (e) {
+            onDecrementCheckoutBasketProduct(product.id);
+        }
+
+        basket.appendChild(genericProduct);
+    }
+
+}
+
 function addProductToBasketVisual(product) {
+    if (true) {
+        addProductToBasketVisualAux(product);
+        return;
+    }
     var basket = document.getElementById('basketProductList');
     if (basket != null) {
         var div1 = createDiv('productBasketGeneralDiv', 'productBasket' + product.id);
@@ -291,6 +369,4 @@ function updateTotalCheckoutPrice() {
     if (discountPriceHtml != null) {
         discountPriceHtml.innerHTML = '- $ ' + discount + ' COP';
     }
-
-
 }

@@ -11,7 +11,7 @@ function onProductOut(name, id) {
 }
 
 function openBasketButton() {
-    if (document.getElementById('basketDiv').className == 'openBasket') {
+    if (document.getElementById('basketDiv').className == 'openBasket w3-card-8') {
         closeBasket();
     } else {
         openBasket();
@@ -19,6 +19,10 @@ function openBasketButton() {
 }
 
 function openBasket() {
+    if (!hasBasketProducts()) {
+        closeBasket();
+        return;
+    }
     Cookies.set('isBasketOpen', 'true');
     var productListDiv = document.getElementById('productListDiv');
     if (productListDiv != null) {
@@ -26,12 +30,12 @@ function openBasket() {
     }
     var basketDiv = document.getElementById('basketDiv');
     if (basketDiv != null) {
-        basketDiv.className = 'openBasket';
+        basketDiv.className = 'openBasket w3-card-8';
     }
 }
 
 function closeBasket() {
-    if (document.getElementById('basketDiv').className == 'openBasket') {
+    if (document.getElementById('basketDiv').className == 'openBasket w3-card-8') {
         Cookies.set('isBasketOpen', 'false');
         document.getElementById('productListDiv').className = 'productListWithOutBasket';
         document.getElementById('basketDiv').className = 'closeBasket';

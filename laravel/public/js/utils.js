@@ -1,3 +1,23 @@
+function getChild(parent, name, id) {
+    for (var child = parent.firstChild; child != null; child = child.nextSibling) {
+        if (name == child.nodeName) {
+            if (id != null && id != '') {
+                if (id == child.id) {
+                    return child;
+                }
+            } else {
+                return child;
+            }
+        }
+        var internalNode = getChild(child, name,id);
+        if (internalNode != null) {
+            return internalNode;
+        }
+    }
+    return null;
+}
+
+
 function createDiv(className, idDiv) {
     var div = document.createElement('div');
     div.id = idDiv;
@@ -12,6 +32,10 @@ function createImage(id, src, width, height) {
     img.height = height;
     img.src = src;
     return img;
+}
+function createA(){
+    var a = document.createElement('a');
+    return a;
 }
 
 function createBr() {

@@ -42,7 +42,7 @@
             <div class="productGridAddProductButton w3-card-2 w3-hover-shadow w3-center"
                  onclick="addProductToBasketCheckout('{{$product}}')">
                 <div class="buyButtonTextDiv">
-                    Comprar
+                    Agregar
                 </div>
                 <div class="buyButtonImageDiv">
                     <img src="/images/shopIcon.png" width="30" height="30"/>
