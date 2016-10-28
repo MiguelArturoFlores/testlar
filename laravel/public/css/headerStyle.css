@@ -99,6 +99,7 @@
 }
 
 .headerMainDiv {
+    position: fixed;
     width: 100%;
     height: 110px;
     background-color: black;

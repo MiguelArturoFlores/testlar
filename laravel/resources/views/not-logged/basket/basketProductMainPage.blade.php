@@ -16,7 +16,7 @@
             <div class="productOptionsIncrementerDiv">
                 <div class="myStoreDropDownDiv">
                     <div class="dropdown">
-                        <button id="productGridSize" class="dropbtn" value="M">Talla M</button>
+                        <button id="productGridSize" class="dropbtn" value="M">Talla</button>
                         <div id="dropdownContent" class="dropdown-content">
 
                         </div>

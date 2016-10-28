@@ -1,8 +1,11 @@
+var myString = new MyStrings();
 var product;
-function showDetailProduct(productModel) {
+
+function showDetailProduct(productModel, productSize) {
     this.product = productModel;
     var dialog = document.getElementById('detailProductDialog');
     dialog.style.display = "block";
+    this.product.size = productSize;
     bindProductData(product);
 }
 
@@ -11,7 +14,7 @@ function closeDetailProductDialog() {
     dialog.style.display = "none";
 }
 
-window.onclick = function (event) {
+function handleClickDialog(event) {
     var dialog = document.getElementById('detailProductDialog');
     if (event.target == dialog) {
         dialog.style.display = "none";
@@ -24,14 +27,14 @@ function bindProductData(product) {
 
     var discount = document.getElementById('detailProductDialogDiscount');
     var discountPercentage = document.getElementById('detailProductDialogDiscountPercentage');
-    var priceLabel = "Precio: ";
+    var priceLabel = myString.priceString;
     if (product.discount > 0) {
-        discount.innerHTML = 'Antes: ' + product.price;
+        discount.innerHTML = myString.beforeString + myString.generatePrice(product.price);
         discount.style.display = '';
-        priceLabel = "Ahora: ";
+        priceLabel = myString.nowString;
         var percentage = Number(product.discount) * 100 / Number(product.price);
         percentage = parseFloat(percentage).toFixed(1);
-        discountPercentage.innerHTML = '-' + percentage + '%';
+        discountPercentage.innerHTML = myString.generatePercentageDiscount(percentage);
         discountPercentage.style.display = '';
     } else {
         discount.style.display = 'none';
@@ -40,7 +43,7 @@ function bindProductData(product) {
     }
 
     var price = document.getElementById('detailProductDialogPrice');
-    price.innerHTML = priceLabel + (Number(product.price) - Number(product.discount)) + ' COP';
+    price.innerHTML = priceLabel + myString.generatePrice((Number(product.price) - Number(product.discount)));
     var image = document.getElementById('detailProductDialogProductImage');
     image.src = "../uploads/" + product.image.toString();
     var description = document.getElementById('detailProductDialogProductDescription');
@@ -49,36 +52,52 @@ function bindProductData(product) {
     descriptionSmall.innerHTML = product.small_description;
     var dialogTitle = document.getElementById('productDialogTitleDiv');
     dialogTitle.innerHTML = product.name;
+
+    onProductDialogSizeSelected(product.size);
+    var dialogSize = document.getElementById('productDialogTitleDiv');
+    dialogTitle.innerHTML = product.name;
+
 }
 
 function addProductToBasketFromDialog() {
     if (hasSelectedSize()) {
+        alert(currentSize);
         insertBasketProduct(product);
         closeDetailProductDialog();
     }
 }
 
 function hasSelectedSize() {
-    for (var i = 1; i <= 3; i++) {
-        var size = document.getElementById('productDialogSize' + i);
-        if (size != null && size.className.includes('buttonSizeSelected')) {
-            return true;
-        }
+    if (hasSelectedSingleSize('S') || hasSelectedSingleSize('M') || hasSelectedSingleSize('L')) {
+        return true;
+    }
+    return false;
+}
+
+function hasSelectedSingleSize(sizeId) {
+    var size = document.getElementById('productDialogSize' + sizeId);
+    if (size != null && size.className.includes('buttonSizeSelected')) {
+        return true;
     }
     return false;
 }
 
 function unselectSizes() {
-    for (var i = 1; i <= 3; i++) {
-        var size = document.getElementById('productDialogSize' + i);
-        if (size != null) {
-            size.className = 'buttonSize ' + 'w3-card-2 w3-hover-shadow w3-center ';
-        }
+    unselectSingleSize('S');
+    unselectSingleSize('M');
+    unselectSingleSize('L');
+}
+
+function unselectSingleSize(sizeId) {
+    var size = document.getElementById('productDialogSize' + sizeId);
+    if (size != null) {
+        size.className = 'buttonSize ' + 'w3-card-2 w3-hover-shadow w3-center ';
     }
 }
 
 function onProductDialogSizeSelected(selectedId) {
     unselectSizes();
-    var size = document.getElementById(selectedId);
+    var size = document.getElementById('productDialogSize' + selectedId);
     size.className = 'buttonSizeSelected ' + 'w3-card-2 w3-hover-shadow w3-center';
+    currentSize = selectedId;
 }

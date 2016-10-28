@@ -1,4 +1,11 @@
+var myString = new MyStrings();
 var productList = new Array();
+
+var currentSize = myString.sizeMediumString;
+
+var totalPrice = 0;
+var subTotal = 0;
+var discount = 0;
 
 document.addEventListener('DOMContentLoaded', function () {
     loadBasketProductsLocaly();
@@ -12,7 +19,7 @@ function updateVisualBasketProduct(product) {
     }
     var productPrice = document.getElementById('productPrice' + product.id);
     if (productPrice != null) {
-        productPrice.innerHTML = product.totalPrice;
+        productPrice.innerHTML = myString.generatePrice(product.totalPrice);
     }
 }
 function updateProductBasket(product) {
@@ -38,17 +45,18 @@ function calculateTotalDifferentItems() {
 function validateShowTotalItems() {
     var cart = document.getElementById('buttonBasketText');
     if (cart != null) {
-        cart.innerHTML = 'Carrito (' + calculateTotalDifferentItems() + ')';
+        cart.innerHTML = myString.generateCartString(calculateTotalDifferentItems());
+        cart.innerHTML = cart.innerHTML + '<br/>' + myString.generatePrice(totalPrice);
     }
 }
+
 function onBasketChange() {
-    validateShowTotalItems();
-    validateShowTotalPrice();
     updateTotalCheckoutPrice();
+    validateShowTotalItems();
     openBasket();
 }
+
 function insertBasketProduct(productToAdd) {
-    //TODO set size
     var product = {
         id: productToAdd.id,
         name: productToAdd.name,
@@ -59,28 +67,34 @@ function insertBasketProduct(productToAdd) {
         discount: productToAdd.discount,
         small_description: productToAdd.small_description,
         quantity: 1,
-        size: ''
+        size: currentSize //This size is calculated on productList
     };
 
-    if (productToAdd.quantity != null && productToAdd.quantity != '') {
-        product.quantity = productToAdd.quantity;
-        productToAdd.totalPrice = (Number(productToAdd.price) - Number(productToAdd.discount)) * productToAdd.quantity;
-    }
+    product.totalPrice = (Number(product.price) - Number(product.discount)) * Number(product.quantity);
 
-    if (productToAdd.totalPrice != null && productToAdd.totalPrice != '') {
-        product.totalPrice = productToAdd.totalPrice;
+    if (productToAdd.size != null && productToAdd.size != '') {
+        product.size = productToAdd.size;
+
     }
 
     if (productIsAlreadyOnBasket(product)) {
         updateProductBasket(product);
         openBasket();
-        updateCookieProduct(product);
+        updateCookieProduct();
     } else {
         productList.push(product);
         addProductToBasketVisual(product);
         addCookieProduct(product);
     }
     onBasketChange();
+}
+
+function hasBasketProductsInitially() {
+    var basketProducts = Cookies.get('basketProducts');
+    if (basketProducts == null) {
+        return false;
+    }
+    return true;
 }
 
 function hasBasketProducts() {
@@ -95,12 +109,13 @@ function addCookieProduct(product) {
     Cookies.set('basketProducts', JSON.stringify(productList));
 }
 
-function updateCookieProduct(product) {
+function updateCookieProduct() {
     Cookies.set('basketProducts', JSON.stringify(productList));
 }
 
 function loadBasketProductsLocaly() {
-    if (!hasBasketProducts()) {
+
+    if (!hasBasketProductsInitially()) {
         productList = new Array();
         return;
     }
@@ -138,20 +153,6 @@ function addProductToBasketCheckout(product) {
     insertBasketProduct(pro);
 }
 
-function validateShowTotalPrice() {
-    var totalPrice = document.getElementById('basketTotalPriceDiv');
-
-    if (totalPrice != null) {
-        if (hasBasketProducts()) {
-            totalPrice.style.display = "inline-block";
-            updateTotalCheckoutPrice();
-        } else {
-            totalPrice.style.display = "none";
-        }
-
-    }
-}
-
 function onRemoveProduct(product) {
     var productNode = document.getElementById('productBasket' + product.id);
     var basket = document.getElementById('basketProductList');
@@ -162,10 +163,29 @@ function onRemoveProduct(product) {
             var index = productList.indexOf(productToRemove);
             if (index > -1) {
                 productList.splice(index, 1);
-                updateCookieProduct(product);
+                updateCookieProduct();
                 onBasketChange();
             }
         }
+    }
+}
+
+function updateProductSizeOnList(productId, sizeId) {
+    for (var index = 0; index < productList.length; ++index) {
+        if (productList[index].id == productId) {
+            productList[index].size = sizeId;
+            updateCookieProduct();
+            break;
+        }
+    }
+}
+
+function changeProductSizeBasket(productId, sizeId) {
+    var size = document.getElementById('productGridSize' + productId);
+    if (size != null) {
+        size.setAttribute('value', sizeId);
+        size.innerHTML = myString.sizeLabelWithOutDots + sizeId;
+        updateProductSizeOnList(productId, sizeId);
     }
 }
 
@@ -193,23 +213,24 @@ function addProductToBasketVisualAux(product) {
 
         var dropdown = getChild(genericProduct, 'DIV', 'dropdownContent');
         var item1 = createA();
-        item1.innerHTML = "Talla S";
+        item1.innerHTML = myString.sizeSmallString;
         item1.onclick = function (e) {
-            changeProductSizeBasket(product.id, 'S');
+            changeProductSizeBasket(product.id, myString.smallSize);
         }
         dropdown.appendChild(item1);
 
         var item2 = createA();
-        item2.innerHTML = "Talla M";
+        item2.innerHTML = myString.sizeMediumString;
         item2.onclick = function (e) {
-            changeProductSizeBasket(product.id, 'M');
+            changeProductSizeBasket(product.id, myString.mediumSize);
         }
         dropdown.appendChild(item2);
 
         var item3 = createA();
-        item3.innerHTML = "Talla L";
+        item3.innerHTML = myString.sizeLargeString;
+        ;
         item3.onclick = function (e) {
-            changeProductSizeBasket(product.id, 'L');
+            changeProductSizeBasket(product.id, myString.largeSize);
         }
         dropdown.appendChild(item3);
 
@@ -235,9 +256,13 @@ function addProductToBasketVisualAux(product) {
             onDecrementCheckoutBasketProduct(product.id);
         }
 
+        var size = getChild(genericProduct, 'BUTTON', 'productGridSize');
+        size.id = 'productGridSize' + product.id;
+        size.setAttribute('value', product.size);
+        size.innerHTML = myString.sizeLabelWithOutDots + product.size;
+
         basket.appendChild(genericProduct);
     }
-
 }
 
 function addProductToBasketVisual(product) {
@@ -258,14 +283,14 @@ function addProductToBasketVisual(product) {
         div12.appendChild(divName);
         div12.appendChild(createBr());
         var divIncrementer = createDiv('', '');
-        var inputMinus = createInput('', 'button', '-');
+        var inputMinus = createInput('', 'button', myString.minusString);
         inputMinus.onclick = function (e) {
             onDecrementCheckoutBasketProduct(product.id);
         }
         divIncrementer.appendChild(inputMinus);
         var inputQuantity = createInput('productQuantity' + product.id, 'text', product.quantity, 'readonly', '1');
         divIncrementer.appendChild(inputQuantity);
-        var inputPlus = createInput('', 'button', '+');
+        var inputPlus = createInput('', 'button', myString.plusString);
         inputPlus.onclick = function (e) {
             onIncrementCheckoutBasketProduct(product.id);
         };
@@ -308,7 +333,11 @@ function findProductById(id) {
 }
 
 function checkoutBasket() {
-    window.location = "http://localhost:8000/checkout";
+    if (hasBasketProducts()) {
+        window.location = "http://localhost:8000/checkout";
+    } else {
+        alert(myString.messageAddProductsToBasket);
+    }
 }
 
 function onIncrementCheckoutBasketProduct(productId) {
@@ -334,7 +363,7 @@ function changeProductQuantity(quantity, productId) {
                 product.quantity = product.quantity + quantity;
             }
             product.totalPrice = (Number(product.price) - Number(product.discount)) * product.quantity;
-            updateCookieProduct(product);
+            updateCookieProduct();
 
             var productPrice = document.getElementById('productPrice' + productId);
             if (productPrice != null) {
@@ -347,26 +376,44 @@ function changeProductQuantity(quantity, productId) {
     onBasketChange();
 }
 
+function updateProductSizes() {
+    for (var index = 0; index < productList.length; ++index) {
+        var size = document.getElementById('productGridSize' + productList[index].id);
+        if (size != null) {
+            size.setAttribute('value' , productList[index].size);
+            size.innerHTML = myString.sizeLabelWithOutDots + productList[index].size;
+        }
+    }
+}
+
 function updateTotalCheckoutPrice() {
     var totalPriceHtml = document.getElementById('checkoutTotalPayment');
     var subTotalPriceHtml = document.getElementById('checkoutSubtotalPayment');
     var discountPriceHtml = document.getElementById('checkoutDiscountPayment');
 
-    var totalPrice = 0;
-    var subTotal = 0;
+    totalPrice = 0;
+    subTotal = 0;
+    discount = 0;
 
     for (index = 0; index < productList.length; ++index) {
         totalPrice = Number(productList[index].totalPrice) + Number(totalPrice);
         subTotal = Number(productList[index].price) * Number(productList[index].quantity) + Number(subTotal);
     }
+
     if (totalPriceHtml != null) {
-        totalPriceHtml.innerHTML = '$ ' + totalPrice + ' COP';
+        totalPriceHtml.innerHTML = myString.generatePrice(totalPrice);
     }
     if (subTotalPriceHtml != null) {
-        subTotalPriceHtml.innerHTML = '$ ' + subTotal + ' COP';
+        subTotalPriceHtml.innerHTML = myString.generatePrice(subTotal);
     }
-    var discount = Number(subTotal) - Number(totalPrice);
+    discount = Number(subTotal) - Number(totalPrice);
+
     if (discountPriceHtml != null) {
-        discountPriceHtml.innerHTML = '- $ ' + discount + ' COP';
+        discountPriceHtml.innerHTML = myString.generatePrice(discount);
     }
+}
+
+function handleClickBasket(event) {
+    //TODO here I can validate when user click outside the basket
+    // but also I need to check when click on buttons that also opens basket
 }

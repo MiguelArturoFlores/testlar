@@ -1,17 +1,17 @@
 <div id="productGrid{{$product->id}}" class="productGridDiv" align="center">
     <div id="productGridCard{{$product->id}}" class="productGridCardDiv w3-card-8" align="center">
         <img src="../uploads/{{ $product->image }}" width="220" height="270"
-             onclick="showDetailProduct({{$product}})">
+             onclick="showDetailProduct({{$product}},getProductListSize({{$product->id}}))">
 
         <div class="productGridDetailButton w3-hover-shadow w3-center"
-             onclick="showDetailProduct({{$product}})">
+             onclick="showDetailProduct({{$product}},getProductListSize({{$product->id}}))">
             Detallar
         </div>
 
         <div class="myStoreDropDownDiv">
             <div class="dropdown">
                 <button id="productGridSize{{$product->id}}" class="dropbtn" value="M">Talla M</button>
-                <div class="dropdown-content">
+                <div class="dropdown-content" style="z-index: 3">
                     <a onclick="changeProductSize('{{$product->id}}','S')">Talla S</a>
                     <a onclick="changeProductSize('{{$product->id}}','M')">Talla M</a>
                     <a onclick="changeProductSize('{{$product->id}}','L')">Talla L</a>
@@ -40,7 +40,7 @@
 
         <div id="divProductGrid{{$product->id}}">
             <div class="productGridAddProductButton w3-card-2 w3-hover-shadow w3-center"
-                 onclick="addProductToBasketCheckout('{{$product}}')">
+                 onclick="calculateProductListSelectedSize({{$product->id}}); addProductToBasketCheckout('{{$product}}')">
                 <div class="buyButtonTextDiv">
                     Agregar
                 </div>

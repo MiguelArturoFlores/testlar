@@ -20,9 +20,10 @@
 }
 
 .finalPaymentBasketDiv {
-    width: 60%;
+    width: 16.5%;
     height: 50px;
-    margin-top: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     display: inline-block;
     text-align: center;
     vertical-align: middle;
@@ -30,9 +31,10 @@
 }
 
 .buttonCloseShoppingCar {
-    width: 37%;
+    width: 8%;
     height: 50px;
-    margin-top: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     display: inline-block;
     text-align: center;
     vertical-align: middle;
@@ -59,6 +61,16 @@
 .basketProductList {
     width: 100%;
     margin-top: 15px;
+}
+
+.basketProductListHeader {
+    background-color: whitesmoke;
+    position: fixed;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 75%;
+    z-index: 1;
+    margin-top: 75px
 }
 
 .basketTotalPriceDiv {

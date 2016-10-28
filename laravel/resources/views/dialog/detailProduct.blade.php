@@ -32,20 +32,20 @@
                 <br/>
                 <br/>
 
-                <div id="productDialogSize1" class="buttonSize w3-card-2 w3-hover-shadow w3-center"
-                     onclick="onProductDialogSizeSelected('productDialogSize1')">
+                <div id="productDialogSizeS" class="buttonSize w3-card-2 w3-hover-shadow w3-center"
+                     onclick="onProductDialogSizeSelected('S')">
                     <div>
                         S
                     </div>
                 </div>
-                <div id="productDialogSize2" class="buttonSize w3-card-2 w3-hover-shadow w3-center"
-                     onclick="onProductDialogSizeSelected('productDialogSize2')">
+                <div id="productDialogSizeM" class="buttonSize w3-card-2 w3-hover-shadow w3-center"
+                     onclick="onProductDialogSizeSelected('M')">
                     <div>
                         M
                     </div>
                 </div>
-                <div id="productDialogSize3" class="buttonSize w3-card-2 w3-hover-shadow w3-center"
-                     onclick="onProductDialogSizeSelected('productDialogSize3')">
+                <div id="productDialogSizeL" class="buttonSize w3-card-2 w3-hover-shadow w3-center"
+                     onclick="onProductDialogSizeSelected('L')">
                     <div>
                         L
                     </div>
@@ -54,7 +54,7 @@
 
                 <div class="detailProductDialogButtonAddToCart w3-card-2 w3-hover-shadow w3-center"
                      onclick="addProductToBasketFromDialog();">
-                    Comprar
+                    Agregar
                 </div>
 
             </div>

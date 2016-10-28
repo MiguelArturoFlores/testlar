@@ -12,12 +12,14 @@
 
     {{--scripts--}}
     <script src="jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/generalStrings.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/utils.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/cookieManager/js.cookie.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/productList.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/basket.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/onLoadStore.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/detailProductDialog.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/generalClickHandler.js') }}"></script>
 
     {{--styles--}}
     <link rel="stylesheet" href="{{ URL::asset('css/dropdownStyle.css') }}"/>

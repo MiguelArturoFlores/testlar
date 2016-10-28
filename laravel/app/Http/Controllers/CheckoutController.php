@@ -75,7 +75,9 @@ class CheckoutController extends Controller
                 if($dbProducts[$j]->id == $jsonProducts[$i]->id){
                     $product = $dbProducts[$j];
                     $product->quantity =  $jsonProducts[$i]->quantity;
+                    $product->size = $jsonProducts[$i]->size;
                     $product->totalPrice = ($product->price - $product->discount) * $product->quantity;
+
                     array_push($productCheckoutList,$product);
                     break;
                 }
