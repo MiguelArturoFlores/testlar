@@ -1,8 +1,77 @@
-.generalLoginDiv{
-    width: 49%;
+.generalLoginDiv {
+    width: 47%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.generalRegisterDiv {
+    width: 47%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.loginHeaderDiv {
+    margin-left: 90px;
+    font-size: 18pt;
+    font-weight: bold;
+    font-family: 'Merriweather', 'serif';
+    display: inline-block;
+    width: 80%;
+    vertical-align: top;
+}
+
+.loginSeparatorDiv {
+    background-color: black;
+    display: inline-block;
+    height: 90%;
+    width: 2px;
+    vertical-align: top;
+}
+
+.loginInputLabelDiv {
+    width: 100%;
+    margin-left: 5px;
+    font-size: 16px;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.loginInputDiv {
+    width: 100%;
+    font-size: 16px;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.registerHeaderDiv {
+    width: 100%;
+    margin-left: 100px;
+    font-size: 18pt;
+    font-weight: bold;
+    font-family: 'Merriweather', 'serif';
+    display: inline-block;
+    vertical-align: top;
+}
+
+.registerInputLabelDiv {
+    width: 25%;
+    font-size: 16px;
+    text-align: left;
+    margin-bottom: 10px;
     display: inline-block;
 }
-.generalRegisterDiv{
-    width: 49%;
+
+.registerInputDiv {
+    width: 70%;
+    font-size: 16px;
+    text-align: left;
+    margin-bottom: 10px;
     display: inline-block;
+}
+
+.registerInputButtonDiv {
+    width: 95%;
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 10px;
 }

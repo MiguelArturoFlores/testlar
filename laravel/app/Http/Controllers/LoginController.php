@@ -4,6 +4,7 @@ namespace testmiguel\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Cookie;
 use testmiguel\Http\Requests;
 
 use Auth;
@@ -34,6 +35,9 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
+        Cookie::queue(
+            Cookie::forget('orderReference')
+        );
         return redirect('/login');
     }
 }

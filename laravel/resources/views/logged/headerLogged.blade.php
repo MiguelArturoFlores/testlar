@@ -1,10 +1,13 @@
 <div class="headerMainDiv w3-card-2">
-    <div class="headerLogoDiv">
-        Bruno Hans
-        <div class="headerLogoSubtitleDiv">
-            Be different
+    <a href="/store">
+        <div class="headerLogoDiv">
+            Bruno Hans
+            <div class="headerLogoSubtitleDiv">
+                Be different
+            </div>
         </div>
-    </div>
+    </a>
+
     <div class="headerOptionsDiv">
 
         <div class="headerGeneralOptionDiv">

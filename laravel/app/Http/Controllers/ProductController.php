@@ -21,8 +21,18 @@ class ProductController extends Controller
         $products = Product::paginate(30);
         //$orders = DB::table('storeorder')->paginate(2);
         //var_dump($orders);
+        $products = $this->calculatePercentageDiscount($products);
         $products = $this->createProductViewList($products);
         return view('productListView', ['productList' => $products]);
+    }
+
+    private function calculatePercentageDiscount($productList)
+    {
+        foreach ($productList as $value) {
+            $value->discountPercentage = round($value->discount * 100 / $value->price, 1);
+        }
+
+        return $productList;
     }
 
     private function createProductViewList($productList)

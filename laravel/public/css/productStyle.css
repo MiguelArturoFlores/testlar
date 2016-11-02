@@ -5,6 +5,7 @@
 .productGridDiv {
     background-color: white;
     vertical-align: top;
+    position: relative;
 }
 
 .productGridCardDiv {

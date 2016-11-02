@@ -1,22 +1,32 @@
-<h3>Login</h3>
-<br/>
-<form action="/login" method="post">
-    <input type="hidden" name="_token" value="<?php echo csrf_token() ?>">
+<div class="loginHeaderDiv">
+    Login
+    <br/>
+    <br/>
 
-    <table>
-        <tr>
-            <td>email</td>
-            <td><input type="text" name="email"/></td>
-        </tr>
-        <tr>
-            <td>Password</td>
-            <td><input type="password" name="password"/></td>
-        </tr>
+    <form action="/login" method="post">
+        <input type="hidden" name="_token" value="<?php echo csrf_token() ?>">
 
-        <tr>
-            <td colspan="2" align="center">
-                <input type="submit" value="Login"/>
-            </td>
-        </tr>
-    </table>
-</form>
+        <div class="loginInputLabelDiv">
+            Email
+        </div>
+
+        <div class="loginInputDiv">
+            <input type="text" name="email"/>
+        </div>
+
+        <div class="loginInputLabelDiv">
+            Password
+        </div>
+
+        <div class="loginInputDiv">
+            <input type="password" name="password"/>
+        </div>
+
+        <div class="loginInputDiv">
+            <input type="submit" value="Login"/>
+        </div>
+    </form>
+
+</div>
+<div class="loginSeparatorDiv">
+</div>

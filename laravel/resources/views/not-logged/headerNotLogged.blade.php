@@ -1,10 +1,12 @@
 <div class="headerMainDiv w3-card-2">
-    <div class="headerLogoDiv">
-        Bruno Hans
-        <div class="headerLogoSubtitleDiv">
-            Be different
+    <a href="/store">
+        <div class="headerLogoDiv">
+            Bruno Hans
+            <div class="headerLogoSubtitleDiv">
+                Be different
+            </div>
         </div>
-    </div>
+    </a>
     <div class="headerOptionsDiv">
 
         <div class="headerGeneralOptionDiv">
@@ -33,7 +35,8 @@
             </div>
         </div>
         <div class="headerGeneralOptionDiv" style="width: 12%">
-            <div id="buttonPay" class="headerCheckoutDiv w3-card-2 w3-hover-shadow w3-center" onclick="checkoutBasket();">
+            <div id="buttonPay" class="headerCheckoutDiv w3-card-2 w3-hover-shadow w3-center"
+                 onclick="checkoutBasket();">
                 Pagar
                 <div>
                     <img src="/images/payIcon.png" width="45" height="45"/>

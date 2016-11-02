@@ -1,8 +1,25 @@
 <div id="productGrid{{$product->id}}" class="productGridDiv" align="center">
-    <div id="productGridCard{{$product->id}}" class="productGridCardDiv w3-card-8" align="center">
-        <img src="../uploads/{{ $product->image }}" width="220" height="270"
-             onclick="showDetailProduct({{$product}},getProductListSize({{$product->id}}))">
+    <div id="productGridCard{{$product->id}}" class="productGridCardDiv w3-card-8">
+        <div style="height: 270px; width: 220px; position: relative;" align="left">
+            <img style="position: absolute" src="../uploads/{{ $product->image }}" width="220" height="270"
+                 onclick="showDetailProduct({{$product}},getProductListSize({{$product->id}}))">
 
+            @if($product->is_new == 1)
+                <img style="position: absolute; left: 190px;" src="../images/labelNew.png" width="30" height="30"/>
+            @endif
+
+            @if($product->has_discount == 1)
+                <div style="position: absolute; left: 0px; top: 225px; left: 175px">
+                    <img style="position: absolute;" src="../images/labelDiscount.png" width="45"
+                         height="45"/>
+
+                    <div id="labelProductDiscount{{$product->id}}" style="position: absolute; width: 45px; top: 15px; text-align: center">
+                        - {{$product->discountPercentage}} %
+                    </div>
+                </div>
+            @endif
+
+        </div>
         <div class="productGridDetailButton w3-hover-shadow w3-center"
              onclick="showDetailProduct({{$product}},getProductListSize({{$product->id}}))">
             Detallar
