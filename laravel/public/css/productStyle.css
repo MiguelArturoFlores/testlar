@@ -2,6 +2,17 @@
     background-color: #1f648b;
 }
 
+.productGridDiv {
+    background-color: white;
+    vertical-align: top;
+    position: relative;
+}
+
+.productGridCardDiv {
+    background-color: white;
+    width: 220px;
+}
+
 .undarkenImage {
     background-color: white;
 }
@@ -18,18 +29,96 @@
     width: 100%;
 }
 
-.productGridDetailButton {
-    width: 40%;
-    height: 50px;
-    background-color: yellow;
+.productGridNameDiv {
+    font-family: 'Merriweather', serif;
+    font-size: 14pt;
+    margin-top: 8px;
+    line-height: 90%;
+}
+
+.productGridDescriptionDiv {
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: justify;
+    text-justify: inter-word;
+    font-weight: normal;
+}
+
+.productGridPriceDivGeneral {
+    margin-left: 10px;
+    text-align: left;
+    width: 100%;
+}
+
+.productGridPriceDiv {
+    display: inline-block;
+    width: 60%;
+    margin-top: 5px;
+    font-size: 13px;
+    text-align: left;
+}
+
+.productGridDiscountLabelDiv {
+    width: 30%;
+    display: inline-block;
+    color: blue;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.productGridPriceDivExalted {
+    width: 60%;
+    text-align: left;
+    font-size: 13px;
+    font-weight: bold;
     display: inline-block;
 }
 
-.productGridAddProductButton {
-    width: 20%;
-    height: 50px;
-    background-color: purple;
+.myStoreDropdownDiv {
+    height: 20px;
     display: inline-block;
+    vertical-align: top;
+    margin-top: 6px;
+    width: 45%
+}
+
+.productGridDetailButton {
+    width: 45%;
+    height: 20px;
+    background-color: whitesmoke;
+    display: inline-block;
+    cursor: pointer;
+    margin-top: 6px;
+    vertical-align: top;
+}
+
+.productGridAddProductButton {
+    width: 90%;
+    height: 40px;
+    background-color: #33cc33;
+    display: inline-block;
+    color: white;
+    margin-bottom: 12px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.buyButtonTextDiv {
+    width: 50%;
+    display: inline-block;
+    text-align: center;
+    vertical-align: top;
+    line-height: 40px;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Merriweather', serif;
+}
+
+.buyButtonImageDiv {
+    display: inline-block;
+    margin-top: 5px;
+    width: 30%;
 }
 
 .divProductGridOptions {
@@ -40,7 +129,13 @@
 .productBasketGeneralDiv {
     display: inline-block;
     vertical-align: top;
+    text-align: left;
     width: 100%;
+    height: 120px;
+    padding: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 20px;
 }
 
 .productBasketImageDiv {
@@ -52,5 +147,49 @@
 .productBasketNameDiv {
     display: inline-block;
     vertical-align: top;
-    width: 69%;
+    width: 50%;
+}
+
+.productBasketDeleteDiv {
+    display: inline-block;
+    vertical-align: top;
+    width: 4%;
+    margin-top: 5px;
+    font-size: 16px;
+    cursor: hand;
+}
+
+.productBasketNameCheckoutDiv {
+    display: inline-block;
+    vertical-align: top;
+    font-family: 'Merriweather', 'serif';
+    font-weight: bold;
+    font-size: 18px;
+    width: 62%;
+}
+
+.productBasketDescriptionCheckoutDiv {
+    margin-top: 5px;
+    text-align: justify;
+    text-justify: inter-word;
+    font-weight: normal;
+}
+
+.productOptionsDiv {
+    width: 100%;
+    display: inline-block;
+    font-weight: normal;
+    margin-top: 5px;
+}
+
+.productOptionsIncrementerDiv {
+    width: 45%;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+}
+
+.productBasketIncrementerPriceDiv {
+    margin-top: 5px;
+    font-weight: bold;
 }

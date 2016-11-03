@@ -18,11 +18,21 @@ class ProductController extends Controller
 
     public function productUserList(Request $request)
     {
-        $products = Product::paginate(9);
+        $products = Product::paginate(30);
         //$orders = DB::table('storeorder')->paginate(2);
         //var_dump($orders);
+        $products = $this->calculatePercentageDiscount($products);
         $products = $this->createProductViewList($products);
         return view('productListView', ['productList' => $products]);
+    }
+
+    private function calculatePercentageDiscount($productList)
+    {
+        foreach ($productList as $value) {
+            $value->discountPercentage = round($value->discount * 100 / $value->price, 1);
+        }
+
+        return $productList;
     }
 
     private function createProductViewList($productList)
@@ -78,6 +88,12 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->description = $request->description;
         $product->price = $request->price;
+        //TODO take this value from the server
+        $product->small_description = $product->description;
+        $product->discount = 0;
+        $product->has_discount = 0;
+        $product->is_new = 0;
+        //TODO ---------------------------------
         $product->save();
 
         //update product image

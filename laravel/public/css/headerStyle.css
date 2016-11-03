@@ -1,0 +1,122 @@
+.headerTitle {
+    font-size: 18px;
+    width: 20%;
+    display: inline-block;
+    text-align: center;
+}
+
+.headerOptionsDiv {
+    width: 65%;
+    height: 120px;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 15px;
+}
+
+.freeShippingHeaderDiv {
+    font-size: 24px;
+    color: white;
+    margin-top: 20px;
+}
+
+.headerLogoDiv {
+    width: 30%;
+    display: inline-block;
+    font-family: 'Kaushan Script', 'cursive';
+    font-size: 50px;
+    margin-top: 5px;
+    color: white;
+}
+
+.headerLogoCheckoutDiv {
+    width: 30%;
+    display: inline-block;
+    font-family: 'Kaushan Script', 'cursive';
+    font-size: 50px;
+    margin-top: 5px;
+    color: white;
+}
+
+.headerGeneralOptionDiv {
+    display: inline-block;
+    text-align: center;
+    height: 100%;
+    vertical-align: top;
+    width: 50%
+}
+
+.headerLoginDiv {
+    width: 100px;
+    height: 55px;
+    display: inline-block;
+    margin-top: 15px;
+    float: right;
+}
+
+.buttonLoginDiv:hover {
+    background: gray;
+}
+
+.buttonLoginDiv {
+    width: 100px;
+    height: 55px;
+    display: inline-block;
+    text-align: center;
+    background-color: black;
+    color: white;
+    margin-bottom: 16px;
+    margin-top: 10px;
+}
+
+.headerBasketDiv {
+    width: 100px;
+    height: 55px;
+    margin-top: 25px;
+    display: inline-block;
+    text-align: center;
+    background-color: black;
+    color: white;
+    float: right;
+}
+
+.headerBasketDiv:hover {
+    background: gray;
+}
+
+.headerCheckoutDiv {
+    width: 100px;
+    height: 55px;
+    display: inline-block;
+    background-color: black;
+    margin-top: 25px;
+    color: white;
+    margin-bottom: 16px;
+    float: right;
+}
+
+.headerCheckoutDiv:hover {
+    background: seagreen;
+}
+
+.headerMainDiv {
+    position: fixed;
+    width: 100%;
+    height: 110px;
+    background-color: black;
+    z-index: 1000;
+}
+
+.headerMainCheckoutDiv{
+    width: 100%;
+    height: 110px;
+    background-color: black;
+}
+
+.headerLogoSubtitleDiv {
+    font-family: 'Kaushan Script', 'cursive';
+    font-size: 30px;
+    margin-left: 50px;
+    margin-top: -10px;
+    margin-bottom: 8px;
+    color: white;
+}

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     //
-    protected $fillable = array('state', 'user_id', 'delivery_type', 'payment_type','coupon_code');
+    protected $fillable = array('state', 'user_id', 'delivery_type', 'payment_type','coupon_code','reference_code');
     protected $table = 'storeorder';
 
     // DEFINE RELATIONSHIPS --------------------------------------------------

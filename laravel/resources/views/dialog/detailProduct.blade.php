@@ -1,33 +1,79 @@
-<div id="detailProductDialog" class="modal">
-
+<div id="detailProductDialog" class="w3-modal">
     <!-- Modal content -->
-    <div class="modal-content1">
-        <span class="close" onclick="closeDetailProductDialog()">x</span>
-        <div style="width: 100%;">
-            <div style="width: 45%; display: inline-block; vertical-align: top;">
-                <img id="detailProductDialogProductImage" src="" width="200" height="200">
+    <div style="width: 75%" class="w3-modal-content">
+
+        <header style="width: 100%; background-color: #222222" class="w3-container w3-card-2">
+            <span onclick="closeDetailProductDialog()" style="color: white;" class="w3-closebtn">&times;</span>
+
+            <div class="productDialogTitle" id="productDialogTitleDiv">
+                Modal Header
+            </div>
+        </header>
+
+        <div class="w3-container">
+
+            <div class="productDialogColName">
+                <div id="detailProductDialogName" class="productDialogNameDiv">
+                </div>
+                <br/><br/>
+
+                <div id="detailProductDialogDiscount" class="productDialogDiscountDiv">
+                </div>
+                <div id="detailProductDialogPrice" class="productDialogPriceDiv">
+                </div>
+                <div id="detailProductDialogDiscountPercentage" class="productDialogDiscountPercentageDiv">
+                </div>
+                <br/>
                 <br/>
 
-                <div id="detailProductDialogProductDescription">
+                <div class="productDialogSizeDiv">
+                    Talla
                 </div>
-            </div >
-            <div style="width: 45%; background-color: red; display: inline-block; vertical-align: top;">
+                <br/>
+                <br/>
 
-                <input id="r1" type='radio' name='sizeChoice' value='S' >
-                <label for="r1">S</label>
+                <div id="productDialogSizeS" class="buttonSize w3-card-2 w3-hover-shadow w3-center"
+                     onclick="onProductDialogSizeSelected('S')">
+                    <div>
+                        S
+                    </div>
+                </div>
+                <div id="productDialogSizeM" class="buttonSize w3-card-2 w3-hover-shadow w3-center"
+                     onclick="onProductDialogSizeSelected('M')">
+                    <div>
+                        M
+                    </div>
+                </div>
+                <div id="productDialogSizeL" class="buttonSize w3-card-2 w3-hover-shadow w3-center"
+                     onclick="onProductDialogSizeSelected('L')">
+                    <div>
+                        L
+                    </div>
+                </div>
+                <br/><br/>
 
-                <input id="r2" type='radio' name='sizeChoice' value='M'>
-                <label for="r2">M</label>
+                <div class="detailProductDialogButtonAddToCart w3-card-2 w3-hover-shadow w3-center"
+                     onclick="addProductToBasketFromDialog();">
+                    Agregar
+                </div>
 
-                <input id="r3" type='radio' name='sizeChoice' value='XL'>
-                <label for="r3">XL</label>
             </div>
+            <div class="productDialogColImage">
+                <img class="w3-card-2" id="detailProductDialogProductImage" src="" width="275" height="350">
+            </div>
+            <div class="productDialogColDescription">
+                <div class="productDialogSmallDescription" id="detailProductDialogProductSmallDescription">
+                </div>
+                <br/><br/>
+
+                <div class="productDialogDescription" id="detailProductDialogProductDescription">
+                </div>
+            </div>
+
         </div>
-        <div style="text-align: center; width: 100%;">
-            <div class="detailProductDialogButtonAddToCart" onclick="addProductToBasketFromDialog();">
-                add to cart
-            </div>
+
+        <div style="height: 25px">
+
         </div>
     </div>
-
 </div>

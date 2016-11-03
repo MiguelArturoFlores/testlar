@@ -1,54 +1,68 @@
-<h3>Register</h3>
-<br/>
-<form action="/user/register" method="post">
-    <input type="hidden" name="_token" value="<?php echo csrf_token() ?>">
+<div class="registerHeaderDiv">
+    Register
+    <br/>
+    <br/>
 
-    <table>
-        <tr>
-            <td>Name</td>
-            <td><input type="text" name="name"/></td>
-        </tr>
+    <form action="/user/register" method="post">
+        <input type="hidden" name="_token" value="<?php echo csrf_token() ?>">
 
-        <tr>
-            <td>last name</td>
-            <td><input type="text" name="lastname"/></td>
-        </tr>
+        <div class="registerInputLabelDiv">
+            Nombre
+        </div>
 
-        <tr>
-            <td>address</td>
-            <td><input type="text" name="address"/></td>
-        </tr>
+        <div class="registerInputDiv">
+            <input type="text" name="name"/>
+        </div>
 
-        <tr>
-            <td>cellphone</td>
-            <td><input type="text" name="cellphone"/></td>
-        </tr>
+        <div class="registerInputLabelDiv">
+            Apellido
+        </div>
 
-        <tr>
-            <td>Country</td>
-            <td><input type="text" name="country" value="Colombia" readonly/></td>
-        </tr>
+        <div class="registerInputDiv">
+            <input type="text" name="lastname"/>
+        </div>
 
-        <tr>
-            <td>State</td>
-            <td>{{Form::select('state',$stateList)}}</td>
-        </tr>
+        <div class="registerInputLabelDiv">
+            Direccion
+        </div>
 
-        <tr>
-            <td>email</td>
-            <td><input type="text" name="email"/></td>
-        </tr>
+        <div class="registerInputDiv">
+            <input type="text" name="address"/>
+        </div>
+        <div class="registerInputLabelDiv">
+            Telefono
+        </div>
+        <div class="registerInputDiv">
+            <input type="text" name="cellphone"/>
+        </div>
+        <div class="registerInputLabelDiv">
+            Pais
+        </div>
+        <div class="registerInputDiv">
+            <input type="text" name="country" value="Colombia" readonly/>
+        </div>
+        <div class="registerInputLabelDiv">
+            Ciudad
+        </div>
+        <div class="registerInputLabelDiv ">
+            {{Form::select('state',$stateList)}}
+        </div>
+        <br/>
+        <div class="registerInputLabelDiv">
+            Email
+        </div>
+        <div class="registerInputDiv">
+            <input type="text" name="email"/>
+        </div>
+        <div class="registerInputLabelDiv">
+            Contrasena
+        </div>
+        <div class="registerInputDiv">
+            <input type="password" name="password"/>
+        </div>
+        <div class="registerInputDiv">
+            <input type="submit" value="Registrarme"/>
+        </div>
 
-        <tr>
-            <td>Password</td>
-            <td><input type="password" name="password"/></td>
-        </tr>
-
-        <tr>
-            <td colspan="2" align="center">
-                <input type="submit" value="Register"/>
-            </td>
-        </tr>
-    </table>
-
-</form>
+    </form>
+</div>

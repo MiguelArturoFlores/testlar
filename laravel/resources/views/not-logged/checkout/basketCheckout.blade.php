@@ -1,35 +1,45 @@
-<h2>4 Verifica tu Orden</h2>
 <script>
     clearBasket();
 </script>
 @for ($i = 0; $i < count($productList); $i++)
     <script>
-        addProductToBasketAux('{!! $productList[$i] !!}');
+        addProductToBasketCheckout('{!! $productList[$i] !!}');
     </script>
 @endfor
 
-@for ($i = 0; $i < count($productList); $i++)
-    <br/>
-    @include('not-logged/basket/basketProduct')
-    <br/>
-@endfor
-
-<br/>
-<div class="checkoutTotalPaymmentDiv">
-
-    <div class="checkoutTotalPaymmentTextDiv">
-        Total Price :
+<div class="checkoutRegisterInfoDiv">
+    <div class="checkoutBuyProcessHeaderNumber">
+        4.
     </div>
-    <div class="checkoutTotalPaymmentNumberDiv" id="checkoutTotalPayment">
+    <div class="checkoutBuyProcessHeaderText">
+        Verifica tu Orden
+    </div>
+    <br/><br/>
+
+    <div class="checkoutPayOrderGeneralDiv w3-card-2">
+
+        @include('not-logged.checkout.basketCheckoutSummary')
+
+        <br/><br/>
 
     </div>
+    <div id="finalPayDiv" class="finalPaymentDiv w3-card-2 w3-hover-shadow w3-center" onclick="submitCheckoutInfoClick()">
+        <div id="textPay" class="checkoutFinalPaymentTextDiv">
+            PAGAR
+        </div>
+    </div>
+    <div>
+        <br/>
+        @for ($i = 0; $i < count($productList); $i++)
+            <br/>
+            @include('not-logged/basket/basketProduct')
+            <br/>
+        @endfor
+    </div>
+
 </div>
-<div id="finalPayDiv" class="finalPaymentDiv">
-    <input id="finalPayButton" hidden type="button" value="PAGAR"/>
-    <div id="textPay" style="padding-top: 20px">
-        PAGAR
-    </div>
-</div>
+
 <script>
+    updateProductSizes();
     updateTotalCheckoutPrice();
 </script>
