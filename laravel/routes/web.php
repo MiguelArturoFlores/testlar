@@ -24,6 +24,7 @@ Route::get('/store', ['uses' => 'ProductController@productUserList']);
 Route::get('/', ['uses' => 'StoreController@index']);
 
 Route::post('/login', 'LoginController@loginUser');
+Route::post('/loginPay', 'LoginController@loginPay');
 Route::get('/login', 'UserRegisterController@indexRegister');
 
 Route::get('/cookie/set', 'CookieController@setCookie');
@@ -79,6 +80,10 @@ Route::post('/uploadProduct', [
 
 Route::get('/checkout', [
         'uses' => 'CheckoutController@index']
+);
+
+Route::post('/checkout/pay', [
+        'uses' => 'CheckoutController@pay']
 );
 
 

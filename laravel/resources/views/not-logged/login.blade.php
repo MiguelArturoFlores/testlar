@@ -3,7 +3,7 @@
     <br/>
     <br/>
 
-    <form action="/login" method="post">
+    <form action={{isset($email) ? "/loginPay" : '/login'}} method="post">
         <input type="hidden" name="_token" value="<?php echo csrf_token() ?>">
 
         <div class="loginInputLabelDiv">
@@ -11,7 +11,9 @@
         </div>
 
         <div class="loginInputDiv">
-            <input type="text" name="email"/>
+
+            <input type="text" name="email" value="{{ $email or '' }}"/>
+
         </div>
 
         <div class="loginInputLabelDiv">

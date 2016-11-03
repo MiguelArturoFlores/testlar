@@ -8,15 +8,19 @@
 
 @section('mainContent')
 
-    <div class="checkoutContainerDiv">
-        <div class="checkoutRegisterDiv">
-            @include('not-logged.checkout.registerCheckout')
+    <form id="formCheckout" action="/checkout/pay" method="post">
+        <input type="hidden" name="_token" value="<?php echo csrf_token() ?>">
+
+        <div class="checkoutContainerDiv">
+            <div class="checkoutRegisterDiv">
+                @include('not-logged.checkout.registerCheckout')
+            </div>
+            <div class="checkoutPaymentDiv">
+                @include('not-logged.checkout.paymentCheckout')
+            </div>
+            <div class="checkoutBasketDiv">
+                @include('not-logged.checkout.basketCheckout')
+            </div>
         </div>
-        <div class="checkoutPaymentDiv">
-            @include('not-logged.checkout.paymentCheckout')
-        </div>
-        <div class="checkoutBasketDiv">
-            @include('not-logged.checkout.basketCheckout')
-        </div>
-    </div>
+    </form>
 @stop

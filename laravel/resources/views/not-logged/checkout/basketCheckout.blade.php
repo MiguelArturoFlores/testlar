@@ -23,9 +23,7 @@
         <br/><br/>
 
     </div>
-    <div id="finalPayDiv" class="finalPaymentDiv w3-card-2 w3-hover-shadow w3-center">
-        <input id="finalPayButton" hidden type="button" value="PAGAR"/>
-
+    <div id="finalPayDiv" class="finalPaymentDiv w3-card-2 w3-hover-shadow w3-center" onclick="submitCheckoutInfoClick()">
         <div id="textPay" class="checkoutFinalPaymentTextDiv">
             PAGAR
         </div>

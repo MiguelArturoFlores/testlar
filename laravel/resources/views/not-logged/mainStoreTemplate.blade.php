@@ -20,6 +20,7 @@
     <script type="text/javascript" src="{{ URL::asset('js/onLoadStore.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/detailProductDialog.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/generalClickHandler.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/checkout.js') }}"></script>
 
     {{--styles--}}
     <link rel="stylesheet" href="{{ URL::asset('css/dropdownStyle.css') }}"/>

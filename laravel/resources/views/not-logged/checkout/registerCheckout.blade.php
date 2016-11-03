@@ -18,14 +18,14 @@
         Apellido*
     </div>
     <div class="checkoutRegisterInputDiv">
-        <input type="text" name="name" value="{{$user->lastname}}"/>
+        <input type="text" name="lastname" value="{{$user->lastname}}"/>
     </div>
 
     <div class="checkoutRegisterInputLabelDiv">
         Email*
     </div>
     <div class="checkoutRegisterInputDiv">
-        <input type="text" name="name" value="{{$user->email}}"/>
+        <input type="text" name="email" value="{{$user->email}}"/>
     </div>
 
     <div class="checkoutRegisterInputLabelDiv">
@@ -46,14 +46,14 @@
         Direccion*
     </div>
     <div class="checkoutRegisterInputDiv">
-        <input type="text" name="name" value="{{$user->address}}"/>
+        <input type="text" name="address" value="{{$user->address}}"/>
     </div>
 
     <div class="checkoutRegisterInputLabelDiv">
         Telefono
     </div>
     <div class="checkoutRegisterInputDiv">
-        <input type="text" name="name" value="{{$user->cellphone}}"/>
+        <input type="text" name="cellphone" value="{{$user->cellphone}}"/>
     </div>
 
 </div>

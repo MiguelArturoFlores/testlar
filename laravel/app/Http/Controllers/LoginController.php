@@ -13,7 +13,6 @@ class LoginController extends Controller
 {
     public function loginUser(Request $request)
     {
-
         $email = $request->input('email');
         $password = $request->input('password');
 
@@ -29,7 +28,28 @@ class LoginController extends Controller
             //add error when try to login
             return redirect('/login');
         }
+    }
 
+    public function loginPay(Request $request){
+        $email = $request->input('email');
+        $password = $request->input('password');
+
+        if (Auth::check()) {
+            if (Auth::user()->email != $email) {
+                Auth::logout();
+            }
+        }
+
+        if (Auth::attempt(['email' => $email, 'password' => $password])) {
+            return redirect("/checkout");
+        } else {
+            //add error when try to login
+            return redirect('/login');
+        }
+    }
+
+    public function tryLoginUser($email,$password){
+        return Auth::attempt(['email' => $email, 'password' => $password]);
     }
 
     public function logout(Request $request)
@@ -40,4 +60,5 @@ class LoginController extends Controller
         );
         return redirect('/login');
     }
+
 }

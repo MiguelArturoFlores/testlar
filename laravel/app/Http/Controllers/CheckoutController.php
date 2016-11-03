@@ -73,16 +73,19 @@ class CheckoutController extends Controller
     public function validateReferenceCode($referenceCode)
     {
         $order = Order::where('reference_code', $referenceCode)->first();
-        if ($order == '' || ($order->state != OrderState::ORDER_TEMPORAL && $order->state != OrderState::ORDER_PENDING_PAYMENT )) {
+        if ($order == '' || ($order->state != OrderState::ORDER_TEMPORAL && $order->state != OrderState::ORDER_PENDING_PAYMENT)) {
             return $this->generateTemporaryOrder();
         }
 
-        ProductOrder::where('order_id', $order->id)->delete();
-        $this->generateOrderProducts($order->id);
+        $this->recreateOrderProducts($order->id);
 
         return $referenceCode;
     }
 
+    /**
+     * create temporry order with order reference code
+     * @return reference order
+     */
     public function generateTemporaryOrder()
     {
         $userId = 0;
@@ -108,9 +111,12 @@ class CheckoutController extends Controller
         return $order->reference_code;
     }
 
+    /**
+     * store product list associated to this order on db
+     * @param $orderId
+     */
     public function generateOrderProducts($orderId)
     {
-        //GENERATING ORDER PRODUCTS
         $basketProducts = $_COOKIE['basketProducts'];
         $jsonProducts = json_decode($basketProducts);
         $productIds = array();
@@ -121,7 +127,6 @@ class CheckoutController extends Controller
         $dbProducts = Product::whereIn('id', $productIds)->get();
 
         $sizeDB = count($dbProducts);
-        $orderProductList = array();
         for ($j = 0; $j < $sizeDB; $j++) {
             $productOrder = new ProductOrder();
             $productOrder->price = $dbProducts[$j]->price;
@@ -142,6 +147,9 @@ class CheckoutController extends Controller
         return isset($_COOKIE['basketProducts']);
     }
 
+    /**
+     * retrieve product list with DB to set on cookies
+     **/
     private function validateProductListDB()
     {
         $basketProducts = $_COOKIE['basketProducts'];
@@ -169,6 +177,168 @@ class CheckoutController extends Controller
             }
         }
         return $productCheckoutList;
+    }
+
+    public function pay(Request $request)
+    {
+        //TODO all this functionality except fields validation is the same that we use on index, check how to make it in a common method
+        if (!$this->hasBasketProducts()) {
+            //TODO add parameters to show message saying there was an error due to invalid basketProducts
+            return view('/checkout');
+        }
+
+        if (Auth::check()) {
+            $user = Auth::user();
+            //TODO check if user has change his address or cellphone and save new values.
+        } else {
+            $email = $request->input('email');
+            $userExist = User::where('email', $email)->first();
+            if ($userExist) {
+                return $this->redirectToLogin($email);
+            }
+            $user = $this->registerNewTemporaryUser($request);
+            $this->loginTemporaryUser($user);
+            //TODO send mail to the user with the password
+        }
+
+        $error = $this->checkValidCheckoutInfo($request);
+        if ($error != '') {
+            echo 'error ' . $error;
+            return;
+        }
+
+        $referenceCode = $request->cookie('orderReference');
+        $referenceCode = $this->validateReferenceCode($referenceCode);
+
+        $order = Order::where('reference_code', $referenceCode)->first();
+        if ($order == '') {
+            echo 'error processing order';
+            return;
+        }
+
+        if ($order->state != OrderState::ORDER_TEMPORAL && $order->state != OrderState::ORDER_PENDING_PAYMENT) {
+            echo 'Invalid Oder, please contact us';
+            return;
+        }
+
+        $productList = $this->validateProductListDB();
+        if ($productList == '') {
+            echo 'error invalid request :(';
+            return;
+        }
+
+        $this->recreateOrderProducts($order->id);
+        $order->state = OrderState::ORDER_PENDING_PAYMENT;
+        $order->user_id = $user->id;
+        $order->save();
+
+
+        echo 'successfuly order now pay u';
+        //TODO send data to PAY-U
+
+    }
+
+    private function checkValidCheckoutInfo($request)
+    {
+        $name = $request->input('name');
+        if ($name == '') {
+            return 'name cant be empty';
+        }
+
+        $lastname = $request->input('lastname');
+        if ($lastname == '') {
+            return 'lastname cant be empty';
+        }
+
+        $email = $request->input('email');
+        if ($email == '') {
+            return 'email cant be empty';
+        }
+
+        $country = $request->input('country');
+        if ($country == '') {
+            return 'country cant be empty';
+        }
+
+        $validState = $this->isValidateState($request);
+        if ($validState == '') {
+            return 'must select a city';
+        }
+
+        $address = $request->input('address');
+        if ($address == '') {
+            return 'address cant be empty';
+        }
+
+        $cellphone = $request->input('cellphone');
+        if ($cellphone == '') {
+            return 'cellphone cant be empty';
+        }
+
+    }
+
+    /**
+     * return empty if couldnt find state
+     **/
+    private function isValidateState($request)
+    {
+        //Retrieve country state input field
+        $countryListName = CountryState::all()->pluck('name');
+        $countryListName->prepend("ninguno");
+
+        $state = $request->input('state');
+        if ($state == '0') {
+            return '';
+        }
+
+        $stateSelected = $countryListName->get($state);
+        if ($stateSelected == '') {
+            return '';
+        }
+
+        return $stateSelected;
+    }
+
+    private function recreateOrderProducts($orderId)
+    {
+        ProductOrder::where('order_id', $orderId)->delete();
+        $this->generateOrderProducts($orderId);
+    }
+
+    private function registerNewTemporaryUser($request)
+    {
+        //TODO do this function on the userRegisterController
+        $user = new User();
+        $user->name = $request->input('name');
+        $user->lastname = $request->input('lastname');
+        $user->email = $request->input('email');
+        $user->country = $request->input('country');
+        $user->country_state = $this->isValidateState($request);
+        $user->address = $request->input('address');
+        $user->cellphone = $request->input('cellphone');
+        $user->password = Hash::make($this->generateRandomPassword());
+        $user->save();
+
+        return $user;
+    }
+
+    private function generateRandomPassword()
+    {
+        //TODO change this
+        return 123456;
+    }
+
+    private function redirectToLogin($email)
+    {
+        $registerController = new UserRegisterController();
+        return $registerController->redirectToLoginPayment($email);
+    }
+
+    private function loginTemporaryUser($user)
+    {
+        //TODO check why this is not working
+        $loginController = new LoginController();
+        $loginController->tryLoginUser($user->email, $user->password);
     }
 
 }

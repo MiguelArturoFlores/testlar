@@ -17,9 +17,21 @@ class UserRegisterController extends Controller
 
     public function indexRegister()
     {
+        return $this->redirectToLogin();
+    }
+
+    public function redirectToLogin()
+    {
         $countryListName = CountryState::all()->pluck('name');
         $countryListName->prepend("ninguno");
         return view('login', ['stateList' => $countryListName]);
+    }
+
+    public function redirectToLoginPayment($email)
+    {
+        $countryListName = CountryState::all()->pluck('name');
+        $countryListName->prepend("ninguno");
+        return view('login', ['stateList' => $countryListName, 'email' => $email]);
     }
 
     public function postRegister(Request $request)
@@ -32,17 +44,17 @@ class UserRegisterController extends Controller
         echo 'State: ' . $state;
         echo '<br>';
 
-        if($state == '0'){
+        if ($state == '0') {
             echo 'must selecet a state';
             echo '<br>';
             return;
         }
 
         $stateSelected = $countryListName->get($state);
-        if($stateSelected == ''){
+        if ($stateSelected == '') {
             echo 'must select a state';
             return;
-        }else {
+        } else {
             echo $stateSelected;
             echo '<br>';
         }
