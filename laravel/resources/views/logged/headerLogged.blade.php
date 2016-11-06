@@ -17,10 +17,12 @@
         </div>
         <div class="headerGeneralOptionDiv" style="width: 20%">
             <div class="headerLoginDiv">
-                <div class="buttonLoginDiv w3-card-2 w3-hover-shadow w3-center">
-                    <form action="/logout" method="post">
+                <div class="buttonLoginDiv w3-card-2 w3-hover-shadow w3-center" onclick="logoutPress()">
+                    <form id="logoutForm" action="/logout" method="post">
                         <input type="hidden" name="_token" value="<?php echo csrf_token() ?>">
-                        <input type="submit" value="Cerrar Session"/>
+                        <div>
+                            Cerrar Session
+                        </div>
                     </form>
                 </div>
                 </a>

@@ -26,6 +26,43 @@ class ProductController extends Controller
         return view('productListView', ['productList' => $products]);
     }
 
+    public function detailPromotionProduct(Request $request, $productId)
+    {
+        if ($productId == '') {
+            //TODO return errow view
+            echo 'invalid';
+            return;
+        }
+        $product = Product::where('id', $productId)->first();
+        if ($product == '') {
+            //TODO return errow view
+            echo 'invalid';
+            return;
+        }
+
+        $product->discountPercentage = number_format($product->discount * 100 / $product->price, 1);
+        return view('product/productPromotionDetail', ['product' => $product]);
+    }
+
+    public function detailProduct(Request $request, $productId)
+    {
+        if ($productId == '') {
+            //TODO return errow view
+            echo 'invalid';
+            return;
+        }
+        $product = Product::where('id', $productId)->first();
+        if ($product == '') {
+            //TODO return errow view
+            echo 'invalid';
+            return;
+        }
+
+        $product->discountPercentage = number_format($product->discount * 100 / $product->price, 1);
+        return view('product/productDetail', ['product' => $product]);
+
+    }
+
     private function calculatePercentageDiscount($productList)
     {
         foreach ($productList as $value) {

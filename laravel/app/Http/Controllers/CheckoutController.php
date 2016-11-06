@@ -16,6 +16,12 @@ use Hash;
 
 class CheckoutController extends Controller
 {
+
+    private $apiKey = 'ypuamGNN5MSXv0HRoKX28M2wSv';
+    private $accountId = '589759';
+    private $merchantId = '586752';
+    private $currecy = 'COP';
+
     public function index(Request $request)
     {
 
@@ -101,6 +107,7 @@ class CheckoutController extends Controller
         $order->payment_type = 0;
         $order->coupon_code = 'none';
         $order->reference_code = 0;
+        $order->price = 0;
 
         $order->save();
         $order->reference_code = Hash::make($order->id);
@@ -126,7 +133,9 @@ class CheckoutController extends Controller
         }
         $dbProducts = Product::whereIn('id', $productIds)->get();
 
+        $totalPrice = 0;
         $sizeDB = count($dbProducts);
+
         for ($j = 0; $j < $sizeDB; $j++) {
             $productOrder = new ProductOrder();
             $productOrder->price = $dbProducts[$j]->price;
@@ -139,7 +148,12 @@ class CheckoutController extends Controller
             $productOrder->image = $dbProducts[$j]->image;
             $productOrder->description = $dbProducts[$j]->description;
             $productOrder->save();
+            $totalPrice = $totalPrice + $productOrder->price - $productOrder->discount;
         }
+        //update order price
+        $order = Order::where('id', $orderId)->first();
+        $order->price = $totalPrice;
+        $order->save();
     }
 
     public function hasBasketProducts()
@@ -187,11 +201,12 @@ class CheckoutController extends Controller
             return view('/checkout');
         }
 
+        $email = $request->input('email');
+        $user = User::where('email', $email)->first();
+
         if (Auth::check()) {
-            $user = Auth::user();
-            //TODO check if user has change his address or cellphone and save new values.
+            $this->checkForUpdateUserCheckoutInfo($user, $request);
         } else {
-            $email = $request->input('email');
             $userExist = User::where('email', $email)->first();
             if ($userExist) {
                 return $this->redirectToLogin($email);
@@ -232,9 +247,15 @@ class CheckoutController extends Controller
         $order->user_id = $user->id;
         $order->save();
 
+        $signature = $this->generateSignature($referenceCode, $order->price);
 
-        echo 'successfuly order now pay u';
-        //TODO send data to PAY-U
+        $description = 'Pago de mi orden';
+
+        $response = new \Illuminate\Http\Response(view('not-logged/checkout/processPayment',
+            ['user' => $user, 'signature' => $signature, 'reference' => $referenceCode, 'merchantId' => $this->merchantId,
+            'accountId' => $this->accountId,'amount' => $order->price, 'currency' => $this->currecy, 'description' => $description]
+        ));
+        return $response;
 
     }
 
@@ -341,4 +362,38 @@ class CheckoutController extends Controller
         $loginController->tryLoginUser($user->email, $user->password);
     }
 
+    private function checkForUpdateUserCheckoutInfo($user, $request)
+    {
+        $country_state = $this->isValidateState($request);
+        $address = $request->input('address');
+        $cellphone = $request->input('cellphone');
+
+        $mustUpdate = false;
+
+        if ($user->country_state != $country_state) {
+            $user->country_state = $country_state;
+            $mustUpdate = true;
+        }
+
+        if ($user->address != $address) {
+            $user->address = $address;
+            $mustUpdate = true;
+        }
+
+        if ($user->cellphone != $cellphone) {
+            $user->cellphone = $cellphone;
+            $mustUpdate = true;
+        }
+
+        if ($mustUpdate) {
+            $user->save();
+        }
+    }
+
+    private function generateSignature($referenceCode, $amount)
+    {
+        $signatureTemp = $this->apiKey . '~' . $this->merchantId . '~' . $referenceCode . '~' . $amount . '~' . $this->currecy;
+        $signature = md5($signatureTemp);
+        return $signature;
+    }
 }

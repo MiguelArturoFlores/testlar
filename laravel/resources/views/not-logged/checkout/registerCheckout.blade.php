@@ -11,21 +11,21 @@
         Nombre*
     </div>
     <div class="checkoutRegisterInputDiv">
-        <input type="text" name="name" value="{{$user->name}}"/>
+        <input type="text" name="name" value="{{$user->name}}" {{Auth::check() ? 'readonly' : ''}}/>
     </div>
 
     <div class="checkoutRegisterInputLabelDiv">
         Apellido*
     </div>
     <div class="checkoutRegisterInputDiv">
-        <input type="text" name="lastname" value="{{$user->lastname}}"/>
+        <input type="text" name="lastname" value="{{$user->lastname}}" {{Auth::check() ? 'readonly' : ''}}/>
     </div>
 
     <div class="checkoutRegisterInputLabelDiv">
         Email*
     </div>
     <div class="checkoutRegisterInputDiv">
-        <input type="text" name="email" value="{{$user->email}}"/>
+        <input type="text" name="email" value="{{$user->email}}" {{Auth::check() ? 'readonly' : ''}}/>
     </div>
 
     <div class="checkoutRegisterInputLabelDiv">
@@ -38,7 +38,7 @@
     <div class="checkoutRegisterInputLabelDiv">
         Ciudad*
     </div>
-    <div class="checkoutRegisterInputDiv">
+    <div class="checkoutRegisterInputDiv" >
         {{Form::select('state',$stateList,$statePosition)}}
     </div>
 

@@ -1,4 +1,4 @@
-<div id="detailProductDialog" class="w3-modal">
+<div id="detailProductDialog" class="w3-modal" style="z-index: 10000">
     <!-- Modal content -->
     <div style="width: 75%" class="w3-modal-content">
 

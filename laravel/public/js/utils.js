@@ -1,3 +1,7 @@
+function containsSubstring(mainValue, subString ){
+    return mainValue.indexOf(subString) != -1;
+}
+
 function getChild(parent, name, id) {
     for (var child = parent.firstChild; child != null; child = child.nextSibling) {
         if (name == child.nodeName) {

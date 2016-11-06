@@ -7,7 +7,7 @@
 @stop
 
 @section('includes')
-    <script type="text/javascript" src="{{ URL::asset('js/storeIndex.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/header.js') }}"></script>
 @stop
 
 @section('content')

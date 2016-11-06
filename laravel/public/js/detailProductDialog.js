@@ -61,7 +61,6 @@ function bindProductData(product) {
 
 function addProductToBasketFromDialog() {
     if (hasSelectedSize()) {
-        alert(currentSize);
         insertBasketProduct(product);
         closeDetailProductDialog();
     }

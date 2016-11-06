@@ -1,6 +1,6 @@
 <div style="width: 100%; display: inline-block; position: fixed; z-index: 2; background-color: whitesmoke" class="w3-card-2">
     <div id="buttonCloseBasket" class="buttonCloseShoppingCar w3-card-2 w3-hover-shadow w3-center"
-         onclick="closeBasket()">
+         onclick="onClickCloseBasket();">
         Seguir<br/>
         comprando
     </div>

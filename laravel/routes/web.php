@@ -21,6 +21,10 @@ Route::get('/nosotros', ['uses' => 'AboutController@index']);
 
 Route::get('/store', ['uses' => 'ProductController@productUserList']);
 
+Route::get('/store/product/{productId}', ['uses' => 'ProductController@detailProduct']);
+
+Route::get('/store/product/promotion/{productId}', ['uses' => 'ProductController@detailPromotionProduct']);
+
 Route::get('/', ['uses' => 'StoreController@index']);
 
 Route::post('/login', 'LoginController@loginUser');

@@ -13,17 +13,21 @@
                     <img style="position: absolute;" src="../images/labelDiscount.png" width="45"
                          height="45"/>
 
-                    <div id="labelProductDiscount{{$product->id}}" style="position: absolute; width: 45px; top: 15px; text-align: center">
+                    <div id="labelProductDiscount{{$product->id}}"
+                         style="position: absolute; width: 45px; top: 15px; text-align: center">
                         - {{$product->discountPercentage}} %
                     </div>
                 </div>
             @endif
 
         </div>
-        <div class="productGridDetailButton w3-hover-shadow w3-center"
-             onclick="showDetailProduct({{$product}},getProductListSize({{$product->id}}))">
-            Detallar
+
+        <div class="productGridDetailButton w3-hover-shadow w3-center">
+            <a href="/store/product/{{$product->id}}">
+                Detallar
+            </a>
         </div>
+
 
         <div class="myStoreDropDownDiv">
             <div class="dropdown">
