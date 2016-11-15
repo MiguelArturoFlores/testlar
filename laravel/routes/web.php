@@ -39,6 +39,10 @@ Route::get('/user/register', function () {
     return view('register');
 });
 
+Route::get('/laravel/public/store1',function (){
+    echo 'asd';
+});
+
 Route::get('/db/testinsert', 'UserRegisterController@insertTest');
 
 Route::get('/Age', [
