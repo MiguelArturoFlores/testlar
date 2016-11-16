@@ -266,52 +266,8 @@ function addProductToBasketVisualAux(product) {
 }
 
 function addProductToBasketVisual(product) {
-    if (true) {
-        addProductToBasketVisualAux(product);
-        return;
-    }
-    var basket = document.getElementById('basketProductList');
-    if (basket != null) {
-        var div1 = createDiv('productBasketGeneralDiv', 'productBasket' + product.id);
-        var div11 = createDiv('productBasketImageDiv', '');
-        var div12 = createDiv('productBasketNameDiv', '');
-        var div13 = createDiv('productBasketDeleteDiv', '');
-        var img = createImage('', '../uploads/' + product.photo, 100, 100);
-        div11.appendChild(img);
-        var divName = createDiv("", "");
-        divName.innerHTML = product.name;
-        div12.appendChild(divName);
-        div12.appendChild(createBr());
-        var divIncrementer = createDiv('', '');
-        var inputMinus = createInput('', 'button', myString.minusString);
-        inputMinus.onclick = function (e) {
-            onDecrementCheckoutBasketProduct(product.id);
-        }
-        divIncrementer.appendChild(inputMinus);
-        var inputQuantity = createInput('productQuantity' + product.id, 'text', product.quantity, 'readonly', '1');
-        divIncrementer.appendChild(inputQuantity);
-        var inputPlus = createInput('', 'button', myString.plusString);
-        inputPlus.onclick = function (e) {
-            onIncrementCheckoutBasketProduct(product.id);
-        };
-        divIncrementer.appendChild(inputPlus);
-        var divPrice = createDiv('', 'productPrice' + product.id);
-        divPrice.innerHTML = product.totalPrice;
-        divIncrementer.appendChild(divPrice);
-        div12.appendChild(divIncrementer);
-
-        div13.innerHTML = 'x';
-        div13.onclick = function (e) {
-            onRemoveProduct(product);
-        }
-
-        div1.appendChild(div11);
-        div1.appendChild(div12);
-        div1.appendChild(div13);
-
-        basket.appendChild(div1);
-        openBasket();
-    }
+    addProductToBasketVisualAux(product);
+    return;
 }
 
 function productIsAlreadyOnBasket(product) {
@@ -334,7 +290,10 @@ function findProductById(id) {
 
 function checkoutBasket() {
     if (hasBasketProducts()) {
-        window.location = "http://localhost:8000/checkout";
+        var button = document.getElementById('checkoutHideButton');
+        if (button != null) {
+            button.click();
+        }
     } else {
         alert(myString.messageAddProductsToBasket);
     }

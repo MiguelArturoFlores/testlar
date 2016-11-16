@@ -42,7 +42,7 @@
     text-align: center;
     height: 100%;
     vertical-align: top;
-    width: 50%
+    width: 50%;
 }
 
 .headerLoginDiv {
@@ -66,6 +66,7 @@
     color: white;
     margin-bottom: 16px;
     margin-top: 10px;
+    cursor: hand;
 }
 
 .headerBasketDiv {
@@ -77,6 +78,7 @@
     background-color: black;
     color: white;
     float: right;
+    cursor: hand;
 }
 
 .headerBasketDiv:hover {
@@ -92,6 +94,7 @@
     color: white;
     margin-bottom: 16px;
     float: right;
+    cursor: hand;
 }
 
 .headerCheckoutDiv:hover {

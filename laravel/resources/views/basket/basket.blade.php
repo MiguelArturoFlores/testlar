@@ -28,3 +28,6 @@
     </div>
 </div>
 @include('not-logged.basket.basketProductMainPage')
+<a href="/checkout">
+<input id="checkoutHideButton" type="button" hidden />
+</a>
