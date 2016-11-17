@@ -94,4 +94,6 @@ Route::post('/checkout/pay', [
         'uses' => 'CheckoutController@pay']
 );
 
-
+Route::post('/store/checkout/myConfirmation',[
+    'uses' => 'CheckoutController@paymentConfirmation'
+]);

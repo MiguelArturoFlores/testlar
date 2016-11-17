@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use testmiguel\CountryState;
 use testmiguel\Http\Requests;
 use testmiguel\Order;
+use testmiguel\OrderPayU;
+use testmiguel\OrderPayUReference;
 use testmiguel\Product;
 use testmiguel\ProductOrder;
 use testmiguel\User;
@@ -17,9 +19,9 @@ use Hash;
 class CheckoutController extends Controller
 {
 
-    private $apiKey = 'ypuamGNN5MSXv0HRoKX28M2wSv';
-    private $accountId = '589759';
-    private $merchantId = '586752';
+    private $apiKey = '4Vj8eK4rloUd272L48hsrarnUA';
+    private $accountId = '512321';
+    private $merchantId = '508029';
     private $currecy = 'COP';
 
     public function index(Request $request)
@@ -71,6 +73,86 @@ class CheckoutController extends Controller
         return $response->cookie('orderReference', $referenceCode);
     }
 
+    /*
+     * function to receive PayU payment response, and update transaction
+     */
+    public function paymentConfirmation(Request $request)
+    {
+        $referenceSale = $request->input('reference_sale');
+        $order = Order::where('payu_order_reference', $referenceSale)->first();
+        $this->generatePayUResponse($request, $order);
+
+        $generateSignature = $this->generateResponseSignature($request);
+        $responseSignature = $request->input('sign');
+        if ($generateSignature != $responseSignature) {
+            //TODO invalid signature
+            return;
+        }
+        $statePol = $request->input('state_pol');
+
+        if ($order == '' || $order->state == OrderState::ORDER_COMPLETE) {
+            return;
+        }
+        if ($statePol != '' && $statePol == OrderState::PAYU_ORDER_APPROVED) {
+            $order->state = OrderState::ORDER_COMPLETE;
+        }
+        if ($statePol != '' && $statePol == OrderState::PAYU_ORDER_DECLINED) {
+            $order->state = OrderState::ORDER_PAYMENT_REJECTED;
+        }
+        if ($statePol != '' && $statePol == OrderState::PAYU_ORDER_EXPIRED) {
+            $order->state = OrderState::ORDER_PAYMENT_EXPIRED;
+        }
+        $order->save();
+    }
+
+    private function generatePayUResponse($request, $order)
+    {
+        $orderPayU = new OrderPayU();
+        $orderPayU->order_id = $order->id;
+        $orderPayU->merchant_id = $request->input('merchant_id');
+        $orderPayU->state_pol = $request->input('state_pol');
+        $orderPayU->risk = $request->input('risk');
+        $orderPayU->response_code_pol = $request->input('response_code_pol');
+        $orderPayU->reference_sale = $request->input('reference_sale');
+        $orderPayU->reference_pol = $request->input('reference_pol');
+        $orderPayU->sign = $request->input('sign');
+        $orderPayU->extra1 = $request->input('extra1');
+        $orderPayU->extra2 = $request->input('extra2');
+        $orderPayU->payment_method = $request->input('payment_method');
+        $orderPayU->payment_method_type = $request->input('payment_method_type');
+        $orderPayU->installments_number = $request->input('installments_number');
+        $orderPayU->value = $request->input('value');
+        $orderPayU->tax = $request->input('tax');
+        $orderPayU->additional_value = $request->input('additional_value');
+        $orderPayU->transaction_date = $request->input('transaction_date');
+        $orderPayU->currency = $request->input('currency');
+        $orderPayU->email_buyer = $request->input('email_buyer');
+        $orderPayU->response_message_pol = $request->input('response_message_pol');
+        $orderPayU->payment_method_id = $request->input('payment_method_id');
+        $orderPayU->payment_method_name = $request->input('payment_method_name');
+        $orderPayU->ip = $request->input('ip');
+        $orderPayU->commision_pol = $request->input('commision_pol');
+        $orderPayU->billing_address = $request->input('billing_address');
+        $orderPayU->shipping_address = $request->input('shipping_address');
+        $orderPayU->phone = $request->input('phone');
+        $orderPayU->date = $request->input('date');
+
+        $orderPayU->save();
+    }
+
+    private function generateResponseSignature($request)
+    {
+        $merchantID = $request->input('merchant_id');
+        $referenceSale = $request->input('reference_sale');
+        $newValue = $request->input('new_value');
+        $currency = $request->input('currency');
+        $statePol = $request->input('state_pol');
+
+        $signatureTemp = $this->apiKey . '~' . $merchantID . '~' . $referenceSale . '~' . $newValue . '~' . $currency . '~' . $statePol;
+        $signature = md5($signatureTemp);
+        return $signature;
+    }
+
     public function hasOrderReference()
     {
         return isset($_COOKIE['orderReference']);
@@ -107,10 +189,11 @@ class CheckoutController extends Controller
         $order->payment_type = 0;
         $order->coupon_code = 'none';
         $order->reference_code = 0;
+        $order->payu_order_reference = 0;
         $order->price = 0;
 
         $order->save();
-        $order->reference_code = Hash::make($order->id);
+        $order->reference_code = 'BrunoHans' . $order->id;//Hash::make($order->id);
         $order->save();
 
         $this->generateOrderProducts($order->id);
@@ -247,13 +330,15 @@ class CheckoutController extends Controller
         $order->user_id = $user->id;
         $order->save();
 
-        $signature = $this->generateSignature($referenceCode, $order->price);
+        $this->generatePayUOrderReference($order);
+
+        $signature = $this->generateSignature($order->payu_order_reference, $order->price);
 
         $description = 'Pago de mi orden';
 
         $response = new \Illuminate\Http\Response(view('not-logged/checkout/processPayment',
-            ['user' => $user, 'signature' => $signature, 'reference' => $referenceCode, 'merchantId' => $this->merchantId,
-            'accountId' => $this->accountId,'amount' => $order->price, 'currency' => $this->currecy, 'description' => $description]
+            ['user' => $user, 'signature' => $signature, 'reference' => $order->payu_order_reference, 'merchantId' => $this->merchantId,
+                'accountId' => $this->accountId, 'amount' => $order->price, 'currency' => $this->currecy, 'description' => $description]
         ));
         return $response;
 
@@ -396,4 +481,18 @@ class CheckoutController extends Controller
         $signature = md5($signatureTemp);
         return $signature;
     }
+
+    private function generatePayUOrderReference($order)
+    {
+        $orderPayU = new OrderPayUReference();
+        $orderPayU->order_id = $order->id;
+        $orderPayU->order_reference = 'BrunoHans';
+        $orderPayU->save();
+        $orderPayU->order_reference = 'BrunoHans' . $orderPayU->id;
+        $orderPayU->save();
+
+        $order->payu_order_reference = $orderPayU->order_reference;
+        $order->save();
+    }
+
 }

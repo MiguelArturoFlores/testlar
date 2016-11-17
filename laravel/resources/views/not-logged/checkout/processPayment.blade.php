@@ -22,7 +22,7 @@
         <input name="test"          type="hidden"  value="{{$amount}}" >
         <input name="buyerEmail"    type="hidden"  value="{{$user->email}}" >
         <input name="responseUrl"    type="hidden"  value="http://www.test.com/response" >
-        <input name="confirmationUrl"    type="hidden"  value="http://www.test.com/confirmation" >
+        <input name="confirmationUrl"    type="hidden"  value="http://www.brunohans.com/store/checkout/myConfirmation" >
         <input name="Submit"        type="submit"  value="Enviar" >
     </form>
 
