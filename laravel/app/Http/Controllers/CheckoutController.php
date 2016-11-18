@@ -5,6 +5,7 @@ namespace testmiguel\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
 use testmiguel\CountryState;
 use testmiguel\Http\Requests;
 use testmiguel\Order;
@@ -23,6 +24,14 @@ class CheckoutController extends Controller
     private $accountId = '512321';
     private $merchantId = '508029';
     private $currecy = 'COP';
+
+    public function validateCorrectPayUrl(Request $request){
+        //TODO check here to prevent back browser button
+        $prevUrl = URL::previous();
+        if(strpos($prevUrl, 'brunohans') == false){
+            redirect('/checkout');
+        }
+    }
 
     public function index(Request $request)
     {
@@ -108,7 +117,11 @@ class CheckoutController extends Controller
     private function generatePayUResponse($request, $order)
     {
         $orderPayU = new OrderPayU();
-        $orderPayU->order_id = $order->id;
+        if($order!=''){
+            $orderPayU->order_id = $order->id;
+        }else{
+            $orderPayU->order_id = 0;
+        }
         $orderPayU->merchant_id = $request->input('merchant_id');
         $orderPayU->state_pol = $request->input('state_pol');
         $orderPayU->risk = $request->input('risk');
@@ -326,7 +339,7 @@ class CheckoutController extends Controller
         }
 
         $this->recreateOrderProducts($order->id);
-        $order->state = OrderState::ORDER_PENDING_PAYMENT;
+        $order->state = OrderState::ORDER_PENDING_PAYMENT_PAYU;
         $order->user_id = $user->id;
         $order->save();
 
@@ -334,7 +347,7 @@ class CheckoutController extends Controller
 
         $signature = $this->generateSignature($order->payu_order_reference, $order->price);
 
-        $description = 'Pago de mi orden';
+        $description = 'Test PAYU';
 
         $response = new \Illuminate\Http\Response(view('not-logged/checkout/processPayment',
             ['user' => $user, 'signature' => $signature, 'reference' => $order->payu_order_reference, 'merchantId' => $this->merchantId,

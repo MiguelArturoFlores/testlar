@@ -19,9 +19,9 @@
         <input name="taxReturnBase" type="hidden"  value="0" >
         <input name="currency"      type="hidden"  value="{{$currency}}" >
         <input name="signature"     type="hidden"  value="{{$signature}}"  >
-        <input name="test"          type="hidden"  value="{{$amount}}" >
         <input name="buyerEmail"    type="hidden"  value="{{$user->email}}" >
-        <input name="responseUrl"    type="hidden"  value="http://www.test.com/response" >
+        <input name="test"          type="hidden"  value="1" >
+        <input name="responseUrl"   type="hidden"  value="http://www.brunohans.com/store/checkout/paymentResponse" >
         <input name="confirmationUrl"    type="hidden"  value="http://www.brunohans.com/store/checkout/myConfirmation" >
         <input name="Submit"        type="submit"  value="Enviar" >
     </form>

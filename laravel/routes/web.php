@@ -94,6 +94,14 @@ Route::post('/checkout/pay', [
         'uses' => 'CheckoutController@pay']
 );
 
+Route::get('/checkout/pay', [
+        'uses' => 'CheckoutController@validateCorrectPayUrl']
+);
+
 Route::post('/store/checkout/myConfirmation',[
     'uses' => 'CheckoutController@paymentConfirmation'
+]);
+
+Route::get('/store/checkout/paymentResponse',[
+    'uses' => 'PayuResponseController@paymentResponse'
 ]);
