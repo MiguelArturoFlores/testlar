@@ -15,6 +15,9 @@ use Auth;
 class OrderController extends Controller
 {
     public function userOrders (Request $request){
+        $payuApi = new PayuApiController();
+        $payuApi->checkOrderByReference('');
+
     	if(Auth::check()){
     		echo 'you are in';
     	}else {

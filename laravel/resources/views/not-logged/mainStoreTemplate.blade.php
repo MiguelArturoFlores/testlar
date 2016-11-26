@@ -34,6 +34,7 @@
     <link rel="stylesheet" href="{{ URL::asset('css/basketStyle.css') }}"/>
     <link rel="stylesheet" href="{{ URL::asset('css/dialogStyle.css') }}"/>
     <link rel="stylesheet" href="{{ URL::asset('css/checkoutStyle.css') }}"/>
+    <link rel="stylesheet" href="{{ URL::asset('css/blogStyle.css') }}"/>
     <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
     @section('mainIncludes')
     @show

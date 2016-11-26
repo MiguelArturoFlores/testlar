@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class OrderPayUReference extends Model
 {
-    protected $fillable = array('id','order_id','order_reference');
+    protected $fillable = array('id','order_id','order_reference','state');
     protected $table = 'storeorderpayureference';
 
 }

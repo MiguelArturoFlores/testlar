@@ -17,6 +17,9 @@ class OrderState extends Model
     const ORDER_BEING_DELIVERED = 7;
     const ORDER_COMPLETE = 8;
 
+    const PAYU_ORDER_NO_STATE = 0;
+    const PAYU_ORDER_PENDING = 1;
+    const PAYU_ORDER_NO_EXIST = 2;
     const PAYU_ORDER_APPROVED = 4;
     const PAYU_ORDER_EXPIRED = 5;
     const PAYU_ORDER_DECLINED = 6;
