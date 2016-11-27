@@ -7,9 +7,9 @@
 @stop
 
 @section('mainContent')
-    <br/>
-    <br/>
-    <div style="text-align: center">
+    <div class="blogContainer" style="text-align: center">
+        <br/>
+        <br/>
         <h2>Error : {{$error}}
             <br/>
             <br/>
@@ -18,4 +18,8 @@
             </a>
         </h2>
     </div>
+@stop
+
+@section('mainFooter')
+    @include('blog.blogFooter')
 @stop

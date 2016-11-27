@@ -21,14 +21,15 @@ class BlogController extends Controller
         if (Auth::check()) {
             if (Auth::user()->default_role == 1) {
                 $post = BlogPost::where('title', '=', $postName)->first();
-            } else {
-                $post = BlogPost::where('title', '=', $postName)->where('test', '=', 0)->first();
             }
         }
+        $post = BlogPost::where('title', '=', $postName)->where('test', '=', 0)->first();
 
         if ($post == '') {
             return view('blog.postNotFound', ['error' => 'Post not found']);
         } else {
+            //TODO maybe read the first h1 from content and not just use the URL title
+            $post->titleNoHyphen = strtoupper(str_replace('-', ' ', $post->title));
             return view('blog.detailPost', ['post' => $post]);
         }
     }

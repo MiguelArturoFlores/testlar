@@ -49,6 +49,10 @@
 
 @show
 
+@section('mainFooter')
+
+@show
+
 @include('dialog/detailProduct')
 
 </body>

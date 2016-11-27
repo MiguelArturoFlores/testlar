@@ -3,6 +3,23 @@
     margin-left: 200px;
 }
 
+.blogFooter {
+    color: white;
+    background-color: black;
+    width: 100%;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+}
+
+.blogContainer{
+    min-height: 70%;
+}
+
+.blogFooterTextContainer{
+    margin-top: 40px;
+}
+
 a:hover, a:visited, a:link, a:active {
     text-decoration: none;
     color: #000000;
