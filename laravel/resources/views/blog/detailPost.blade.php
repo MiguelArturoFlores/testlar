@@ -1,6 +1,6 @@
 @extends('not-logged.mainStoreTemplate')
 
-@section('mainTitle', 'Bruno Hans Blog')
+@section('mainTitle',  $post->title .' Bruno Hans Blog' )
 
 @section('mainHeader')
     @include('blog.headerBlog')
