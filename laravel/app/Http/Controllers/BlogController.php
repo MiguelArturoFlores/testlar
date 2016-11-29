@@ -22,8 +22,9 @@ class BlogController extends Controller
             if (Auth::user()->default_role == 1) {
                 $post = BlogPost::where('title', '=', $postName)->first();
             }
+        } else {
+            $post = BlogPost::where('title', '=', $postName)->where('test', '=', 0)->first();
         }
-        $post = BlogPost::where('title', '=', $postName)->where('test', '=', 0)->first();
 
         if ($post == '') {
             return view('blog.postNotFound', ['error' => 'Post not found']);
