@@ -1,2 +1,3 @@
 User-agent: *
 Disallow:
+Sitemap: http://brunohans.com/sitemap.txt
