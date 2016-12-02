@@ -13,15 +13,22 @@ class CreateTableBlogimage extends Migration
      */
     public function up()
     {
-        Schema::create('blogimage', function (Blueprint $table) {
 
-            $table->increments('id');
-            $table->string('entire_name', 128)->unique();
-            $table->string('folder', 128);
-            $table->string('original_name', 256);
-            $table->timestamps();
+        $hasTable = Schema::hasTable('blogimage', function (Blueprint $table) {
 
         });
+
+        if (!$hasTable) {
+            Schema::create('blogimage', function (Blueprint $table) {
+
+                $table->increments('id');
+                $table->string('entire_name')->unique();
+                $table->string('folder', 128);
+                $table->string('original_name', 256);
+                $table->timestamps();
+
+            });
+        }
     }
 
     /**

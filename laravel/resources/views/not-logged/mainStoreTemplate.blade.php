@@ -9,6 +9,8 @@
 
     {{--view port--}}
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    @section('mainMeta')
+    @show
 
     {{--scripts--}}
     <script type="text/javascript" src="{{ URL::asset('js/generalStrings.js') }}"></script>

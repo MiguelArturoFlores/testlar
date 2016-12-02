@@ -29,10 +29,53 @@ class BlogController extends Controller
         if ($post == '') {
             return view('blog.postNotFound', ['error' => 'Post not found']);
         } else {
+            //TODO associate this image when creating the post for optimize and dont repeat this when load each post
+            $post->imageToShow = $this->getPostImage($post);
             //TODO maybe read the first h1 from content and not just use the URL title
             $post->titleNoHyphen = strtoupper(str_replace('-', ' ', $post->title));
             return view('blog.detailPost', ['post' => $post]);
         }
+    }
+
+    private function getPostImage($post)
+    {
+        $position = strpos($post->content, "<img");
+        if ($position == false) {
+            //TODO return default image to bruno hans.
+            return "";
+        } else {
+            $imgStr = substr($post->content, $position, strlen($post->content));
+            $positionEnd = strpos($imgStr, "/>",0);
+
+            $imgTag = substr($post->content, $position, $position + $positionEnd);
+
+            /*$position = strpos($imgTag, "src=\"");
+            $position = $position + 5;
+            //$imgStr = substr($imgTag, $position, strlen($imgTag));
+            $positionEnd = strpos($imgTag, ".jpg");
+            $positionEnd = $positionEnd;
+
+            //$imgTag = substr($imgTag, $position, $position + $positionEnd);*/
+            return $imgTag;
+
+        }
+
+        //TODO return default image to bruno hans.
+        return "";
+    }
+
+    private function getPostResume($post)
+    {
+        $position = strpos($post->content, "<img");
+        if ($position == false) {
+            return $post->title;
+        } else {
+            $imgStr = substr($post->content, $position, strlen($post->content));
+            $positionEnd = strpos($imgStr, "/>");
+            return substr($post->content, 0, $position + $positionEnd);
+        }
+
+        return $post->title;
     }
 
     public function indexUploadBlogImage(Request $request)
@@ -129,20 +172,6 @@ class BlogController extends Controller
     public function listUserPostTest(Request $request)
     {
         return $this->loadPostList(1);
-    }
-
-    private function getPostResume($post)
-    {
-        $position = strpos($post->content, "<img");
-        if ($position == false) {
-            return $post->title;
-        } else {
-            $imgStr = substr($post->content, $position, strlen($post->content));
-            $positionEnd = strpos($imgStr, "/>");
-            return substr($post->content, 0, $position + $positionEnd);
-        }
-
-        return $post->title;
     }
 
     private function loadPostList($isTest)
