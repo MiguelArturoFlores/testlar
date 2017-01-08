@@ -44,19 +44,12 @@ class BlogController extends Controller
             //TODO return default image to bruno hans.
             return "";
         } else {
-            $imgStr = substr($post->content, $position, strlen($post->content));
-            $positionEnd = strpos($imgStr, "/>",0);
+            $doc = new \DOMDocument();
+            $doc->loadHTML($post->content);
+            $xpath = new \DOMXPath($doc);
+            $src = $xpath->evaluate("string(//img/@src)");
 
-            $imgTag = substr($post->content, $position, $position + $positionEnd);
-
-            /*$position = strpos($imgTag, "src=\"");
-            $position = $position + 5;
-            //$imgStr = substr($imgTag, $position, strlen($imgTag));
-            $positionEnd = strpos($imgTag, ".jpg");
-            $positionEnd = $positionEnd;
-
-            //$imgTag = substr($imgTag, $position, $position + $positionEnd);*/
-            return $imgTag;
+            return $src;
 
         }
 
